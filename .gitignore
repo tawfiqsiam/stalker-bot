@@ -1,0 +1,8 @@
+###########################
+## Main Dir file Ignores ##
+
+#Protect Enveroinmet Varibles
+.env
+
+#Prevent Masive Upload of Node Deps
+node_modules/
