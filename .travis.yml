@@ -18,7 +18,9 @@ jobs:
 branches:
   only:
   - master
+  - deployment
   - development
+  - dev
 cache:
   directories:
   - node_modules
