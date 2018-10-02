@@ -3,29 +3,51 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title>Stalker Bot | Powered by Discord.JS</title>
 
         <link rel="icon" href="favicon.ico" type="image/png" />
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-        <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/themes/red-white.css"> 
+
+        <script src="https://unpkg.com/scrollreveal@4.0.4/dist/scrollreveal.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="./js/scripts.js"></script>
     </head>
     <body>
-        <main>
-            <div class="intro">Stalker Bot | Powered by Discord.JS</div>
-            <div class="tagline">By D4RKAR117 | Student | Codder | Linux User | Gamer </div>
+        <main class="d-flex flex-column justify-content-center">
+            <div class="intro col-12 top-reveal">Hello I'm Stalker Bot | Powered by Discord.JS</div>
+            <div class="tagline col-12 mb-1 right-reveal">By <strong>@D4RKAR117</strong> | Student | Codder | Linux User | Gamer </div>
+            <div class="tagline col-12 mt-1 bot-reveal">In Develop since 2018 </div>
             <!-- Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-            <div class="icons-social bounce">
-                <a target="_blank" href="https://github.com/D4RKAR117/stalker-bot"><i class="fab fa-github"></i></a>
-                <a target="_blank" href="https://twitter.com/D4RKAR117"><i class="fab fa-twitter"></i></a>
-                <a target="_blank" href="https://discordapp.com/api/oauth2/authorize?client_id=496184604559015936&permissions=8&scope=bot"><i class="fab fa-discord"></i></a>
-                <a target="_blank" href="https://github.com/discordjs/discord.js"><i class="fab fa-js"></i></a>
-            </div>
+            <section class="col-12 justify-content-center row">
+                <div data-toggle="tooltip" data-placement="top" title="Visit my repo!!" class="icons-social bounce p-2 d-block col-md-2 left-reveal">
+                    <a href="https://github.com/D4RKAR117/stalker-bot">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div data-toggle="tooltip" data-placement="top" title="Visit my human twitter!!" class="icons-social bounce p-2 col-md-2 top-reveal">
+                    <a href="https://twitter.com/D4RKAR117">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <div data-toggle="tooltip" data-placement="top" title="Invite me to your Discord server!!" class="icons-social bounce p-2 col-md-2 bot-reveal">
+                    <a href="https://discordapp.com/api/oauth2/authorize?client_id=496184604559015936&permissions=8&scope=bot">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+                <div data-toggle="tooltip" data-placement="top" title="See my origins !!" class="icons-social bounce p-2 col-md-2 right-reveal">
+                    <a href="https://github.com/discordjs/discord.js">
+                        <i class="fab fa-js"></i>
+                    </a>
+                </div>
+            </section>
         </main>
     </body>
 </html>

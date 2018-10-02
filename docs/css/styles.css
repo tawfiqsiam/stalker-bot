@@ -28,17 +28,10 @@ html {
 	}
 }
 
-.icons-social i {
-	font-size: 3em;
-}
-
 /* Custom Styles */
 
 main {
-	display: flex;
-	flex-direction: column;
 	min-height: 100vh;
-	justify-content: center;
 	padding: 0 30px;
 	text-align: center;
 }
@@ -56,18 +49,8 @@ main > .tagline {
 }
 
 .icons-social i {
-	padding: 10px;
-}
-
-.devto {
-	margin-bottom: -0.20rem;
-}
-
-.devto svg {
-	margin-bottom: -0.20rem;
-	margin-left: 0.675rem;;
-	width: 2.65rem;
-	height: 2.65rem;
+    padding: 10px !important;
+    font-size: 3em !important;
 }
 
 /* Animmation Styles */
@@ -90,4 +73,8 @@ main > .tagline {
 }
 .bounce:hover {
 	animation: bounce 1s;
+}
+
+html.sr .top-reveal, .bot-reveal, .right-reveal, .left-reveal {
+    visibility: hidden;
 }
