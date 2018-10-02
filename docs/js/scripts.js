@@ -17,27 +17,31 @@ const SrClassOptions = {
 }
 
 const RightOptions = {
-	duration: 4500,
-    origin: 'right'/*,
-    easing: 'ease-in-out'*/
+	duration: 3400,
+    origin: 'right',
+    easing: 'ease-in-out',
+    distance: '35%'
 };
 
 const LeftOptions = {
-	duration: 4500,
-    origin: 'left' /*,
-    easing: 'ease-in-out'*/
+	duration: 3400,
+    origin: 'left',
+    easing: 'ease-in-out',
+    distance: '35%'
 };
 
 const TopOptions = {
-	duration: 4500,
-    origin: 'top'/*,
-    easing: 'ease-in-out'*/
+	duration: 3400,
+    origin: 'top',
+    easing: 'ease-in-out',
+    distance: '35%'
 };
 
 const BottomOptions = {
-	duration: 4500,
-    origin: 'bottom'/*,
-    easing: 'ease-in-out'*/
+	duration: 3400,
+    origin: 'bottom',
+    easing: 'ease-in-out',
+    distance: '35%'
 };
 
 document.addEventListener('DOMContentLoaded', function(event) {

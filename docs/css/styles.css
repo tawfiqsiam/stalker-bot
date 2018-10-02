@@ -1,7 +1,8 @@
 /* Typography */
 
 html {
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 @media (min-width: 576px) {
@@ -75,6 +76,9 @@ main > .tagline {
 	animation: bounce 1s;
 }
 
-html.sr .top-reveal, .bot-reveal, .right-reveal, .left-reveal {
-    visibility: hidden;
+html.sr .top-reveal,
+html.sr .bot-reveal,
+html.sr .right-reveal,
+html.sr .left-reveal {
+  visibility: hidden;
 }
