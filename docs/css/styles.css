@@ -1,8 +1,101 @@
 /* Typography */
 
 html {
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden; 
+    box-sizing: border-box;
+    font-size: 12px;
+    width: 100vw !important;
+
 }
+
+/* Minimal CSS Reset */
+  
+ *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+  
+  ol, ul {
+    list-style: none;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+/* Custom Styles */
+
+main {
+	min-height: 100vh;
+	padding: 0 30px;
+	text-align: center;
+}
+
+.intro {
+	font-family: 'Reem Kufi', sans-serif;
+	font-size: 3.75em;
+	font-weight: 600;
+}
+
+.tagline {
+	font-size: 1.5rem;
+	margin: 1.5rem 0;
+	font-weight: 100;
+}
+
+.icons-social i {
+    padding: 10px !important;
+    font-size: 3em !important;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+html.sr .top-reveal,
+html.sr .bot-reveal,
+html.sr .right-reveal,
+html.sr .left-reveal,
+html.sr .reveal-logo {
+  visibility: hidden;
+}
+
+.app-logo{
+    max-height: 635px !important;
+}
+
+/* Animmation Keyframes Styles */
+
+@keyframes bounce {
+	0%, 20%, 60%, 100% {
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	40% {
+		-webkit-transform: translateY(-20px);
+		transform: translateY(-20px);
+	}
+
+	80% {
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+.bounce:hover {
+	animation: bounce 1s;
+}
+
+/* Breakpoints */ 
 
 @media (min-width: 576px) {
 	html {
@@ -26,55 +119,4 @@ html {
 	html {
 		font-size: 20px;
 	}
-}
-
-/* Custom Styles */
-
-main {
-	min-height: 100vh;
-	padding: 0 30px;
-	text-align: center;
-}
-
-main > .intro {
-	font-family: 'Reem Kufi', sans-serif;
-	font-size: 3.75em;
-	font-weight: 600;
-}
-
-main > .tagline {
-	font-size: 1.5rem;
-	margin: 1.5rem 0;
-	font-weight: 100;
-}
-
-.icons-social i {
-    padding: 10px !important;
-    font-size: 3em !important;
-}
-
-/* Animmation Styles */
-
-@keyframes bounce {
-	0%, 20%, 60%, 100% {
-		-webkit-transform: translateY(0);
-		transform: translateY(0);
-	}
-
-	40% {
-		-webkit-transform: translateY(-20px);
-		transform: translateY(-20px);
-	}
-
-	80% {
-		-webkit-transform: translateY(-10px);
-		transform: translateY(-10px);
-	}
-}
-.bounce:hover {
-	animation: bounce 1s;
-}
-
-html.sr .top-reveal, .bot-reveal, .right-reveal, .left-reveal {
-    visibility: hidden;
 }
