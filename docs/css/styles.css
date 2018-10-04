@@ -73,6 +73,14 @@ html.sr .reveal-logo {
     max-height: 635px !important;
 }
 
+.text-footer{
+    color: #5a5a5e !important;
+}
+
+.text-footer:hover{
+    color: #FAFAFA;
+}
+
 /* Animmation Keyframes Styles */
 
 @keyframes bounce {
