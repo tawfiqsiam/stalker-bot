@@ -9,6 +9,7 @@ before_install:
 install:
 - dos2unix ./travis/test.sh
 - dos2unix ./travis/send.sh
+- dos2unix ./build.sh
 - npm install -g eslint --save
 - npm install
 jobs:
