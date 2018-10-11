@@ -44,6 +44,9 @@ else
 				echo "Installing Node Using NVM"
 				nvm install 8.12.0
 				echo "2° Step: Installing Node Dependencies >>>"
+                npm wincheck
+                sleep 5
+                echo "=/=/=/=============================/=/=/="
 				npm install
 				echo "All node dependencies installed >> You can start your bot with npm start"
 			else

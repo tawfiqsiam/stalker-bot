@@ -1,12 +1,13 @@
 {
   "name": "stalker-bot",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Custom Halo/Warframe/League of legends/Server Discord bot",
   "main": "bot.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint --debug bot.js",
-    "preinstall": "node ./travis/Windows/WinPreInstall.js",
+    "wincheck": "node ./travis/OsCheck/WinPreInstall.js",
+    "windows-install":"npm i --global --production windows-build-tools",
     "start": "node bot.js"
   },
   "repository": {
