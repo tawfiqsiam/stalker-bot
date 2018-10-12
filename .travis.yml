@@ -6,6 +6,7 @@ os:
 sudo: required
 before_install:
 - sudo apt-get install dos2unix
+- npm run preinstall
 install:
 - dos2unix ./travis/test.sh
 - dos2unix ./travis/send.sh

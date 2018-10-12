@@ -5,6 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "test": "npm run lint",
+    "preinstall": "sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++",
     "lint": "eslint --debug bot.js",
     "wincheck": "node ./travis/OsCheck/WinPreInstall.js",
     "windows-install": "npm i --global --production windows-build-tools",
@@ -27,6 +28,7 @@
   "homepage": "https://github.com/D4RKAR117/stalker-bot#readme",
   "dependencies": {
     "babel-eslint": "^10.0.1",
+    "canvas": "^2.0.0-alpha.18",
     "discord.js": "^11.4.2",
     "dotenv": "^6.1.0",
     "eslint": "^5.6.1",
