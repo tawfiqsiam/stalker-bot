@@ -40,12 +40,11 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	// Check if are commands registered
-	if (!client.commands.has(commandName)) return;
-
 	// Gets all command collection
 	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+	if (!command) return;
 
 	// Only Guild / Server Commands
 	if (command.guildOnly && message.channel.type !== 'text') {
@@ -60,8 +59,6 @@ client.on('message', message => {
 		}
 		return message.channel.send(reply);
 	}
-
-	if (!command) return;
 
 	if (!cooldowns.has(command.name)) {
 		cooldowns.set(command.name, new Discord.Collection());
