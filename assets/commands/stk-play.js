@@ -11,6 +11,9 @@ module.exports = {
 	usage: '<video name | video/playlist url>',
 	aliases: ['search', 'music'],
 	guildOnly: true,
+	queueSongs: function() {
+		return queue;
+	},
 	description: 'Play music from  youtube by stalker bot',
 	execute(message, _args) {
 		const { voiceChannel } = message.member;
@@ -75,7 +78,7 @@ function addToQueue(_videos, _message) {
 	const ytEmbed = new Discord.RichEmbed()
 		.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 		.setColor('#7f1515')
-		.addField(':white_check_mark: Added: ', `**${queue.length + 1}** songs to the queue :notes: :notes:`, true)
+		.addField(':white_check_mark: Added: ', `**${queue.length + 1}** songs are in the queue :notes: :notes:`, true)
 		.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 	_videos.forEach(video => {
 		queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': _message.author });
