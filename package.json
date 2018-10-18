@@ -8,7 +8,7 @@
     "lint": "eslint --debug bot.js",
     "wincheck": "node ./travis/OsCheck/WinPreInstall.js",
     "windows-install": "npm i --global --production --save windows-build-tools ffmpeg-binaries",
-    "start": "node bot.js"
+    "start": "nohup node bot.js"
   },
   "repository": {
     "type": "git",
