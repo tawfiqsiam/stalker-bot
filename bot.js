@@ -34,7 +34,7 @@ client.on('ready', () => {
 	console.log('Ready for Stalk!!');
 });
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
