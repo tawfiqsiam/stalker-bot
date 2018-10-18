@@ -8,10 +8,10 @@ let playing = false;
 
 module.exports = {
 	name: 'play',
-	usage: '<no have parameters>',
-	aliases: ['delay', 'time'],
+	usage: '<video name | video/playlist url>',
+	aliases: ['search', 'music'],
 	guildOnly: true,
-	description: 'Get stalker bot response time',
+	description: 'Play music from  youtube by stalker bot',
 	execute(message, _args) {
 		const { voiceChannel } = message.member;
 		const rgex = /(http:|https:)?\/\/(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)?(\S+)?/;
@@ -29,34 +29,34 @@ module.exports = {
 						return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 					}
 					const ytEmbed = new Discord.RichEmbed()
-						.setAuthor(`YouTube search result for ${_args}`.split(',').join(' '))
+						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setThumbnail(results[0].thumbnails.high.url)
-						.setColor('#ffc1cc')
+						.setColor('#7f1515')
 						.addField('Title', results[0].title, true)
 						.addField('Channel', results[0].channel.title, true)
-						.addField('Description', results[0].description)
-						.addField('Link', `https://youtu.be/${results[0].id}`);
-
-					message.channel.send(ytEmbed);
-					console.log('Normal:' + playing);
+						.addField('Queue Position', `**${queue.length + 1}**`, true)
+						.addField('Link', `https://youtu.be/${results[0].id}`)
+						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					if(playing) {addToQueue(results, message);}
 					else{
 						addToQueue(results, message);
 						play(queue, voiceChannel);
 					}
-
-
+					message.channel.send(ytEmbed);
 				})
 				.catch(console.log);
 		}
 		else {
 			youtube.getPlaylist(_args[0])
 				.then(playlist => {
-					console.log(`The playlist's title is ${playlist.title}`);
+					const ytEmbed = new Discord.RichEmbed()
+						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
+						.setColor('#7f1515')
+						.addField('Requested playlist: ', `${playlist.title} :notes:`, true)
+						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
+					message.channel.send(ytEmbed);
 					playlist.getVideos()
 						.then(videos => {
-							console.log(`This playlist has ${videos.length === 50 ? '50+' : videos.length} videos.`);
-							console.log('Url:' + playing);
 							if(playing) {addToQueue(videos, message);}
 							else{
 								addToQueue(videos, message);
@@ -72,10 +72,15 @@ module.exports = {
 	},
 };
 function addToQueue(_videos, _message) {
+	const ytEmbed = new Discord.RichEmbed()
+		.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
+		.setColor('#7f1515')
+		.addField(':white_check_mark: Added: ', `**${queue.length + 1}** songs to the queue :notes: :notes:`, true)
+		.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 	_videos.forEach(video => {
 		queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': _message.author });
-		_message.channel.send(`Added ${video.title} to the queue in position ${queue.length}`);
 	});
+	_message.channel.send(ytEmbed);
 }
 
 
