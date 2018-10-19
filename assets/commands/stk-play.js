@@ -11,13 +11,11 @@ module.exports = {
 	usage: '<video name | video/playlist url>',
 	aliases: ['search', 'music'],
 	guildOnly: true,
-	queueSongs: function() {
-		return queue;
-	},
 	description: 'Play music from  youtube by stalker bot',
 	execute(message, _args) {
+		process.setMaxListeners(0);
 		const { voiceChannel } = message.member;
-		const rgex = /(http:|https:)?\/\/(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)?(\S+)?/;
+		const rgex = /^https?:\/\/(youtube.com)\/playlist(.*)$/;
 		if (!rgex.exec(`${_args}`.split(',').join(' '))) {
 			youtube.searchVideos(_args, 1)
 				.then(results => {
@@ -43,7 +41,7 @@ module.exports = {
 					if(playing) {addToQueue(results, message);}
 					else{
 						addToQueue(results, message);
-						play(queue, voiceChannel);
+						play(message.guild.queue, voiceChannel, message);
 					}
 					message.channel.send(ytEmbed);
 				})
@@ -62,8 +60,8 @@ module.exports = {
 						.then(videos => {
 							if(playing) {addToQueue(videos, message);}
 							else{
-								addToQueue(videos, message);
-								play(queue, voiceChannel);
+								addToQueue(videos, message, message);
+								play(message.guild.queue, voiceChannel, message);
 							}
 						})
 						.catch(console.log);
@@ -82,13 +80,17 @@ function addToQueue(_videos, _message) {
 		.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 	_videos.forEach(video => {
 		queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': _message.author });
+		_message.guild.queue = queue;
+		console.log('add' + _message.guild.queue);
 	});
 	_message.channel.send(ytEmbed);
 }
 
 
-function play(_queue, _voiceChannel) {
-	const currentplay = queue[0];
+function play(_queue, _voiceChannel, _message) {
+	console.log('play' + _message.guild.queue);
+	_message.guild.queue = queue;
+	const currentplay = _queue[0];
 	_voiceChannel.join().then(connection => {
 		playing = true;
 		const stream = ytdl(currentplay.url, { filter: 'audioonly' });

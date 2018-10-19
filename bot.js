@@ -6,12 +6,14 @@ const fs = require('fs');
 
 // require the discord.js module
 const Discord = require('discord.js');
+const queue = {};
 
 // Stablish Default Bot Config Objects
 const { prefix } = require('./assets/config/botcfg.json');
 
 // create a new Discord client
 const client = new Discord.Client();
+
 
 // create a bot command / cooldowns Collection and File Record
 client.commands = new Discord.Collection();
@@ -32,9 +34,12 @@ for (const file of commandFiles) {
 // - reconnects after disconnecting
 client.on('ready', () => {
 	console.log('Ready for Stalk!!');
+	client.user.setActivity(`on ${client.guilds.size} servers`);
+	console.log(`Ready to stalk on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
 client.on('message', async message => {
+	message.guild.queue = queue;
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -95,7 +100,7 @@ client.on('message', async message => {
 
 	try {
 		// Executes the commands if provides message and args
-		command.execute(message, args);
+		command.execute(message, args, client);
 	}
 	catch (error) {
 		console.error(error);
