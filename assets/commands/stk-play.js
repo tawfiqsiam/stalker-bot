@@ -18,7 +18,7 @@ module.exports = {
 		if(!Status.Playing)Status.Playing = [];
 		Status.Playing.push({ 'playing':false });
 		const { voiceChannel } = message.member;
-		const rgex = /^https?:\/\/(youtube.com)\/playlist(.*)$/;
+		const rgex = /^(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?.*?(?:v|list)=(.*?)(?:&|$)$/gm;
 		if (!rgex.exec(`${_args}`.split(',').join(' '))) {
 			youtube.searchVideos(_args, 1)
 				.then(results => {
