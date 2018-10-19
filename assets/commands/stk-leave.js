@@ -1,8 +1,5 @@
 /* eslint no-unused-vars: "off" */
 
-const Discord = require('discord.js');
-const play = require('./stk-play');
-
 module.exports = {
 	name: 'leave',
 	usage: '<no have parameters>',
@@ -13,5 +10,6 @@ module.exports = {
 
 		const { voiceChannel } = message.member;
 		voiceChannel.leave();
+
 	},
 };

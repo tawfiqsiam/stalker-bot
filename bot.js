@@ -6,7 +6,8 @@ const fs = require('fs');
 
 // require the discord.js module
 const Discord = require('discord.js');
-const queue = {};
+const queue = new Map();
+const playing = new Map();
 
 // Stablish Default Bot Config Objects
 const { prefix } = require('./assets/config/botcfg.json');
@@ -39,7 +40,10 @@ client.on('ready', () => {
 });
 
 client.on('message', async message => {
-	message.guild.queue = queue;
+	let options = {
+		songQ: queue,
+		isplay: playing,
+	};
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -100,7 +104,7 @@ client.on('message', async message => {
 
 	try {
 		// Executes the commands if provides message and args
-		command.execute(message, args, client);
+		command.execute(message, args, client, options);
 	}
 	catch (error) {
 		console.error(error);
