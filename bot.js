@@ -10,8 +10,7 @@ const queue = new Map();
 const playing = new Map();
 
 // Stablish Default Bot Config Objects
-const currentPrefrences = process.env.BOT_DEP == false ? './assets/config/botcfg.json' : './assets/config/devcfg.json';
-const { prefix } = require(currentPrefrences);
+const { prefix } = require('./assets/config/botcfg.json');
 
 // create a new Discord client
 const client = new Discord.Client();
