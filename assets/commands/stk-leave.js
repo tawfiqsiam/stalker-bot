@@ -5,7 +5,7 @@ module.exports = {
 	usage: '<no have parameters>',
 	aliases: ['quit', 'exit'],
 	guildOnly: true,
-	description: 'Get stalker bot response time',
+	description: 'Disconnects the bot from voice channel and clear the queue music',
 	execute(message, _args, _client, options) {
 
 		const { voiceChannel } = message.member;
