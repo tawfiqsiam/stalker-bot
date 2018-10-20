@@ -113,10 +113,9 @@ module.exports = {
 					Songs.Queue.shift();
 					console.log('shifted the queue');
 					if (Songs.Queue.length > 0) {
-						console.log('enter to queue next');
+						console.log('enter to queue next -->' + Songs.Queue.length);
 						currentplay = Songs.Queue[0];
-						stream = ytdl(currentplay.url, { filter: 'audioonly' });
-						dispatcher = connection.playStream(stream);
+						play();
 					}
 					else {
 						Status.Playing = false;
