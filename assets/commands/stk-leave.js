@@ -10,7 +10,7 @@ module.exports = {
 
 		const { voiceChannel } = message.member;
 		let Status = options.isplay.get(message.guild.id) || {};
-		if(!Status.Playing)Status.Playing = [];
+		if(!Status.Playing)Status.Playing = false;
 		if (!voiceChannel) {
 			return message.reply('please join a voice channel first!');
 		}
@@ -21,14 +21,13 @@ module.exports = {
 		if (!permissions.has('SPEAK')) {
 			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 		}
-		voiceChannel.leave();
-		Status.Playing.push({ 'playing':false });
-		Status.Playing.shift();
+		Status.Playing = false;
 		options.isplay.set(message.guild.id, Status);
 		options.songQ.delete(message.guild.id);
+		voiceChannel.leave();
 
 		message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
-		console.log(options.songQ.get(message.guild.id));
+		console.log(`result of leave: ${Object.values(options.isplay.get(message.guild.id))}`);
 
 	},
 };

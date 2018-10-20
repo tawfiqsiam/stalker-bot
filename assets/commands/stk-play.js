@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
+const urlCheck = require('is-playlist');
 const youtube = new YouTube(process.env.API_TOKEN);
 
 module.exports = {
@@ -9,17 +10,18 @@ module.exports = {
 	usage: '<video name | video/playlist url>',
 	aliases: ['search', 'music'],
 	guildOnly: true,
+	args: true,
 	description: 'Play music from  youtube by stalker bot',
 	execute(message, _args, _client, options) {
 		process.setMaxListeners(0);
 		let Songs = options.songQ.get(message.guild.id) || {};
 		let Status = options.isplay.get(message.guild.id) || {};
+		let isPlaylist = false;
 		if(!Songs.Queue)Songs.Queue = [];
-		if(!Status.Playing)Status.Playing = [];
-		Status.Playing.push({ 'playing':false });
+		if(!Status.Playing)Status.Playing = false;
+		options.isplay.set(message.guild.id, Status);
 		const { voiceChannel } = message.member;
-		const rgex = /^(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?.*?(?:v|list)=(.*?)(?:&|$)$/gm;
-		if (!rgex.exec(`${_args}`.split(',').join(' '))) {
+		if (urlCheck(`${_args}`.split(',').join(' ')) == false) {
 			youtube.searchVideos(_args, 1)
 				.then(results => {
 					if (!voiceChannel) {
@@ -38,15 +40,16 @@ module.exports = {
 						.setColor('#7f1515')
 						.addField('Title', results[0].title, true)
 						.addField('Channel', results[0].channel.title, true)
-						.addField('Queue Position', `**${Songs.Queue.length + 1}**`, true)
+						.addField('Queue Position', `**${Songs.Queue.length == 0 ? 'Now Playing' : Songs.Queue.length}**`, true)
 						.addField('Link', `https://youtu.be/${results[0].id}`)
+						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-					if(Status.Playing[0].playing) {
-						console.log('first:' + Status.Playing[0]);
+					if(Status.Playing == true) {
+						console.log('Already playing normal:' + Status.Playing);
 						addToQueue(results);
 					}
 					else{
-						console.log('second:' + Status.Playing[0]);
+						console.log('New playing normal:' + Status.Playing);
 						addToQueue(results);
 						play();
 					}
@@ -55,24 +58,26 @@ module.exports = {
 				.catch(console.log);
 		}
 		else {
+			isPlaylist = true;
 			youtube.getPlaylist(_args[0])
 				.then(playlist => {
 					const ytEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setColor('#7f1515')
-						.addField('Requested playlist: ', `${playlist.title} :notes:`, true)
+						.addField('Requested playlist: ', `** ${playlist.title} ** :notes:`, true)
+						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					message.channel.send(ytEmbed);
 					playlist.getVideos()
 						.then(videos => {
-							if(Status.Playing[0].playing) {
+							if(Status.Playing == true) {
 								addToQueue(videos);
-								console.log('firts2:' + Status.Playing[0].playing);
+								console.log('Already Playing playlist:' + Status.Playing);
 							}
 							else{
+								console.log('New Playing playlist:' + Status.Playing);
 								addToQueue(videos);
 								play();
-								console.log('second2:' + Status.Playing[0].playing);
 							}
 						})
 						.catch(console.log);
@@ -85,9 +90,11 @@ module.exports = {
 			const ytEmbed = new Discord.RichEmbed()
 				.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 				.setColor('#7f1515')
-				.addField(':white_check_mark: Added: ', `**${Songs.Queue.length + 1}** songs are in the queue :notes: :notes:`, true)
+				.addField(':white_check_mark: Added: ', `**${isPlaylist ? 'Playlist' : Songs.Queue.length + 1}** songs are now in the queue :notes: :notes:`, true)
+				.setTimestamp()
 				.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-			Status.Playing.push({ 'playing':true });
+			if(Status.Playing == false)Status.Playing = true;
+			options.isplay.set(message.guild.id, Status);
 			_videos.forEach(video => {
 				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': message.author.tag });
 				options.songQ.set(message.guild.id, Songs);
@@ -97,31 +104,25 @@ module.exports = {
 
 
 		function play() {
-			const currentplay = Songs.Queue[0];
+			let currentplay = Songs.Queue[0];
 			voiceChannel.join().then(connection => {
-				if(Status.Playing[0].playing == false) {
-					Status.Playing.push({ 'playing':true });
-					Status.Playing.shift();
-					options.isplay.set(message.guild.id, Status);
-					console.log('After Start:' + Status.Playing[0]);
-				}
-				const stream = ytdl(currentplay.url, { filter: 'audioonly' });
-				const dispatcher = connection.playStream(stream);
-				Songs.Queue.shift();
+				console.log('Main Play');
+				let stream = ytdl(currentplay.url, { filter: 'audioonly' });
+				let dispatcher = connection.playStream(stream);
 				dispatcher.on('end', () => {
-					if(Songs.Queue.length > 0) {
-						play();
-						Status.Playing.push({ 'playing':true });
-						Status.Playing.shift();
-						options.isplay.set(message.guild.id, Status);
-						console.log('third:' + Status.Playing[0]);
+					Songs.Queue.shift();
+					console.log('shifted the queue');
+					if (Songs.Queue.length > 0) {
+						console.log('enter to queue next');
+						currentplay = Songs.Queue[0];
+						stream = ytdl(currentplay.url, { filter: 'audioonly' });
+						dispatcher = connection.playStream(stream);
 					}
-					else{
-						Status.Playing.push({ 'playing':false });
-						Status.Playing.shift();
+					else {
+						Status.Playing = false;
 						options.isplay.set(message.guild.id, Status);
-						voiceChannel.leave();
 						options.songQ.delete(message.guild.id);
+						voiceChannel.leave();
 					}
 				});
 			});
