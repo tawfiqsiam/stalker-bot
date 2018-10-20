@@ -1,10 +1,10 @@
 /* eslint no-unused-vars: "off" */
 module.exports = {
-	name: 'resume',
+	name: 'skip',
 	usage: '<no have parameters>',
-	aliases: ['rs', 'continue'],
+	aliases: ['next', 'jump'],
 	guildOnly: true,
-	description: 'Get stalker bot response time',
+	description: 'Skip the current song',
 	execute(message, _args) {
 
 		const { voiceChannel } = message.member;
