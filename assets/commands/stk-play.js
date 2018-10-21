@@ -38,18 +38,15 @@ module.exports = {
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setThumbnail(results[0].thumbnails.high.url)
 						.setColor('#7f1515')
-						.addField('Title', results[0].title, true)
+						.addField('Title', `** [${results[0].title}](https://youtu.be/${results[0].id}) **`, true)
 						.addField('Channel', results[0].channel.title, true)
 						.addField('Queue Position', `**${Songs.Queue.length == 0 ? 'Now Playing' : Songs.Queue.length}**`, true)
-						.addField('Link', `https://youtu.be/${results[0].id}`)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					if(Status.Playing == true) {
-						console.log('Already playing normal:' + Status.Playing);
 						addToQueue(results);
 					}
 					else{
-						console.log('New playing normal:' + Status.Playing);
 						addToQueue(results);
 						play();
 					}
@@ -64,7 +61,7 @@ module.exports = {
 					const ytEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setColor('#7f1515')
-						.addField('Requested playlist: ', `** ${playlist.title} ** :notes:`, true)
+						.addField('Requested playlist: ', `** [${playlist.title}](${_args[0]}) ** :notes:`, true)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					message.channel.send(ytEmbed);
@@ -72,10 +69,8 @@ module.exports = {
 						.then(videos => {
 							if(Status.Playing == true) {
 								addToQueue(videos);
-								console.log('Already Playing playlist:' + Status.Playing);
 							}
 							else{
-								console.log('New Playing playlist:' + Status.Playing);
 								addToQueue(videos);
 								play();
 							}
@@ -96,7 +91,10 @@ module.exports = {
 			if(Status.Playing == false)Status.Playing = true;
 			options.isplay.set(message.guild.id, Status);
 			_videos.forEach(video => {
-				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': message.author.tag });
+				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`,
+					'requestby': message.author.name,
+					'songName': video.title,
+				});
 				options.songQ.set(message.guild.id, Songs);
 			});
 			message.channel.send(ytEmbed);
@@ -106,7 +104,6 @@ module.exports = {
 		function play() {
 			let currentplay = Songs.Queue[0];
 			voiceChannel.join().then(connection => {
-				console.log('Main Play');
 				let stream = ytdl(currentplay.url, { filter: 'audioonly' });
 				let dispatcher = connection.playStream(stream);
 				dispatcher.on('end', () => {

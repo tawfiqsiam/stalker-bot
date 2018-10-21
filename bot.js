@@ -8,9 +8,10 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const queue = new Map();
 const playing = new Map();
+const Status = new Map();
 
 // Stablish Default Bot Config Objects
-const { prefix } = require('./assets/config/botcfg.json');
+const { prefix, server } = require('./assets/config/botcfg.json');
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -33,16 +34,25 @@ for (const file of commandFiles) {
 // this event will trigger whenever your bot:
 // - finishes logging in
 // - reconnects after disconnecting
+
+
 client.on('ready', () => {
+	let Activities = [`on ${client.guilds.size} servers`,
+		`with ${client.users.size} users`,
+		`${server}`,
+	];
+	setInterval(function() {
+		let activity = Activities[Math.floor(Math.random() * Activities.length)];
+		client.user.setActivity(activity, { type: 'PLAYING' });
+	}, 15000);
 	console.log('Ready for Stalk!!');
-	client.user.setActivity(`on ${client.guilds.size} servers`);
-	console.log(`Ready to stalk on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
 client.on('message', async message => {
 	let options = {
 		songQ: queue,
 		isplay: playing,
+		songStatus: Status,
 	};
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
