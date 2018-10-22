@@ -38,7 +38,7 @@ module.exports = {
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setThumbnail(results[0].thumbnails.high.url)
 						.setColor('#7f1515')
-						.addField('Title', `** [${results[0].title}](https://youtu.be/${results[0].id}) **`, true)
+						.addField('Title', `** [${results[0].title}](https://youtu.be/${results[0].id}) **`, false)
 						.addField('Channel', results[0].channel.title, true)
 						.addField('Queue Position', `**${Songs.Queue.length == 0 ? 'Now Playing' : Songs.Queue.length}**`, true)
 						.setTimestamp()
@@ -61,17 +61,21 @@ module.exports = {
 					const ytEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setColor('#7f1515')
-						.addField('Requested playlist: ', `** [${playlist.title}](${_args[0]}) ** :notes:`, true)
+						.addField('Requested playlist: ', `** [${playlist.title}](${playlist.url}) ** :notes:`, false)
+						.addField('Publish Date', `** ${playlist.publishedAt.getFullYear()} **`, false)
+						.addField('By', `** ${playlist.channel.title} **`)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					message.channel.send(ytEmbed);
+					const playtitle = playlist.title;
 					playlist.getVideos()
 						.then(videos => {
+							const playlen = videos.length;
 							if(Status.Playing == true) {
-								addToQueue(videos);
+								addToQueue(videos, playlen, playtitle);
 							}
 							else{
-								addToQueue(videos);
+								addToQueue(videos, playlen, playtitle);
 								play();
 							}
 						})
@@ -81,11 +85,11 @@ module.exports = {
 		}
 		process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
-		function addToQueue(_videos) {
+		function addToQueue(_videos, _plNumber, _plTitle) {
 			const ytEmbed = new Discord.RichEmbed()
 				.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 				.setColor('#7f1515')
-				.addField(':white_check_mark: Added: ', `**${isPlaylist ? 'Playlist' : Songs.Queue.length + 1}** songs are now in the queue :notes: :notes:`, true)
+				.addField(':white_check_mark: Added: ', `**${isPlaylist ? `${_plTitle} with ${_plNumber} ` : Songs.Queue.length + 1}** songs are now in the queue :notes: :notes:`, true)
 				.setTimestamp()
 				.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 			if(Status.Playing == false)Status.Playing = true;
