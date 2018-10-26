@@ -2,23 +2,26 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
+const urlCheck = require('is-playlist');
 const youtube = new YouTube(process.env.API_TOKEN);
-const queue = [];
-let playing = false;
 
 module.exports = {
 	name: 'play',
 	usage: '<video name | video/playlist url>',
 	aliases: ['search', 'music'],
 	guildOnly: true,
-	queueSongs: function() {
-		return queue;
-	},
+	args: true,
 	description: 'Play music from  youtube by stalker bot',
-	execute(message, _args) {
+	execute(message, _args, _client, options) {
+		process.setMaxListeners(0);
+		let Songs = options.songQ.get(message.guild.id) || {};
+		let Status = options.isplay.get(message.guild.id) || {};
+		let isPlaylist = false;
+		if(!Songs.Queue)Songs.Queue = [];
+		if(!Status.Playing)Status.Playing = false;
+		options.isplay.set(message.guild.id, Status);
 		const { voiceChannel } = message.member;
-		const rgex = /(http:|https:)?\/\/(www\.)?(youtube.com|youtu.be)\/(watch)?(\?v=)?(\S+)?/;
-		if (!rgex.exec(`${_args}`.split(',').join(' '))) {
+		if (urlCheck(`${_args}`.split(',').join(' ')) == false) {
 			youtube.searchVideos(_args, 1)
 				.then(results => {
 					if (!voiceChannel) {
@@ -35,35 +38,45 @@ module.exports = {
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setThumbnail(results[0].thumbnails.high.url)
 						.setColor('#7f1515')
-						.addField('Title', results[0].title, true)
+						.addField('Title', `** [${results[0].title}](https://youtu.be/${results[0].id}) **`, false)
 						.addField('Channel', results[0].channel.title, true)
-						.addField('Queue Position', `**${queue.length + 1}**`, true)
-						.addField('Link', `https://youtu.be/${results[0].id}`)
+						.addField('Queue Position', `**${Songs.Queue.length == 0 ? 'Now Playing' : Songs.Queue.length}**`, true)
+						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-					if(playing) {addToQueue(results, message);}
+					if(Status.Playing == true) {
+						addToQueue(results);
+					}
 					else{
-						addToQueue(results, message);
-						play(queue, voiceChannel);
+						addToQueue(results);
+						play();
 					}
 					message.channel.send(ytEmbed);
 				})
 				.catch(console.log);
 		}
 		else {
+			isPlaylist = true;
 			youtube.getPlaylist(_args[0])
 				.then(playlist => {
 					const ytEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setColor('#7f1515')
-						.addField('Requested playlist: ', `${playlist.title} :notes:`, true)
+						.addField('Requested playlist: ', `** [${playlist.title}](${playlist.url}) ** :notes:`, false)
+						.addField('Publish Date', `** ${playlist.publishedAt.getFullYear()} **`, false)
+						.addField('By', `** ${playlist.channel.title} **`)
+						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					message.channel.send(ytEmbed);
+					const playtitle = playlist.title;
 					playlist.getVideos()
 						.then(videos => {
-							if(playing) {addToQueue(videos, message);}
+							const playlen = videos.length;
+							if(Status.Playing == true) {
+								addToQueue(videos, playlen, playtitle);
+							}
 							else{
-								addToQueue(videos, message);
-								play(queue, voiceChannel);
+								addToQueue(videos, playlen, playtitle);
+								play();
 							}
 						})
 						.catch(console.log);
@@ -72,37 +85,48 @@ module.exports = {
 		}
 		process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
+		function addToQueue(_videos, _plNumber, _plTitle) {
+			const ytEmbed = new Discord.RichEmbed()
+				.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
+				.setColor('#7f1515')
+				.addField(':white_check_mark: Added: ', `**${isPlaylist ? `${_plTitle} with ${_plNumber} ` : Songs.Queue.length + 1}** songs are now in the queue :notes: :notes:`, true)
+				.setTimestamp()
+				.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
+			if(Status.Playing == false)Status.Playing = true;
+			options.isplay.set(message.guild.id, Status);
+			_videos.forEach(video => {
+				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`,
+					'requestby': message.author.name,
+					'songName': video.title,
+				});
+				options.songQ.set(message.guild.id, Songs);
+			});
+			message.channel.send(ytEmbed);
+		}
+
+
+		function play() {
+			let currentplay = Songs.Queue[0];
+			voiceChannel.join().then(connection => {
+				let stream = ytdl(currentplay.url, { filter: 'audioonly' });
+				let dispatcher = connection.playStream(stream);
+				dispatcher.on('end', () => {
+					Songs.Queue.shift();
+					console.log('shifted the queue');
+					if (Songs.Queue.length > 0) {
+						console.log('enter to queue next -->' + Songs.Queue.length);
+						currentplay = Songs.Queue[0];
+						play();
+					}
+					else {
+						Status.Playing = false;
+						options.isplay.set(message.guild.id, Status);
+						options.songQ.delete(message.guild.id);
+						voiceChannel.leave();
+					}
+				});
+			});
+		}
 	},
 };
-function addToQueue(_videos, _message) {
-	const ytEmbed = new Discord.RichEmbed()
-		.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
-		.setColor('#7f1515')
-		.addField(':white_check_mark: Added: ', `**${queue.length + 1}** songs are in the queue :notes: :notes:`, true)
-		.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-	_videos.forEach(video => {
-		queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`, 'requestby': _message.author });
-	});
-	_message.channel.send(ytEmbed);
-}
 
-
-function play(_queue, _voiceChannel) {
-	const currentplay = queue[0];
-	_voiceChannel.join().then(connection => {
-		playing = true;
-		const stream = ytdl(currentplay.url, { filter: 'audioonly' });
-		const dispatcher = connection.playStream(stream);
-		queue.shift();
-		dispatcher.on('end', () => {
-			if(queue.length > 0) {
-				play(_queue, _voiceChannel);
-				playing = true;
-			}
-			else{
-				playing = false;
-				_voiceChannel.leave();
-			}
-		});
-	});
-}

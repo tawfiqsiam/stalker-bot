@@ -1,34 +1,33 @@
 /* eslint no-unused-vars: "off" */
 const Discord = require('discord.js');
-const play = require('./stk-play');
-
 module.exports = {
-	name: 'pause',
+	name: 'skip',
 	usage: '<no have parameters>',
-	aliases: ['p', 'wait'],
+	aliases: ['next', 'jump'],
 	guildOnly: true,
-	description: 'Get stalker bot response time',
+	description: 'Skip the current song',
 	execute(message, _args, _client, options) {
 
 		const { voiceChannel } = message.member;
+		let stSong = options.songStatus.get(message.guild.id) || {};
+		if(!stSong.Paused)stSong.Paused = false;
+
 		const actionEmbed = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 			.setColor('#7f1515')
-			.addField('**__Song Status__**', '** Paused  :pause_button:**', true)
+			.addField('**__Song Status__**', '** Skkiped  :fast_forward:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 		const actionError = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 			.setColor('#7f1515')
-			.addField('**__Song Error__**', '** The bot is already paused, use resume instead  :x:**', true)
+			.addField('**__Song Error__**', '** The bot is currently paused, use resume and after useskip :x:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-		let stSong = options.songStatus.get(message.guild.id) || {};
-		if(!stSong.Paused)stSong.Paused = false;
 		if(stSong.Paused == false) {
-			voiceChannel.connection.dispatcher.pause();
+			voiceChannel.connection.dispatcher.end();
 			message.channel.send(actionEmbed);
-			stSong.Paused = true;
+			stSong.Paused = false;
 		}
 		else{
 			message.channel.send(actionError);

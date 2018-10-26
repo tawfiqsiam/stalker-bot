@@ -6,12 +6,16 @@ const fs = require('fs');
 
 // require the discord.js module
 const Discord = require('discord.js');
+const queue = new Map();
+const playing = new Map();
+const Status = new Map();
 
 // Stablish Default Bot Config Objects
-const { prefix } = require('./assets/config/botcfg.json');
+const { prefix, server } = require('./assets/config/botcfg.json');
 
 // create a new Discord client
 const client = new Discord.Client();
+
 
 // create a bot command / cooldowns Collection and File Record
 client.commands = new Discord.Collection();
@@ -30,11 +34,26 @@ for (const file of commandFiles) {
 // this event will trigger whenever your bot:
 // - finishes logging in
 // - reconnects after disconnecting
+
+
 client.on('ready', () => {
+	let Activities = [`on ${client.guilds.size} servers`,
+		`with ${client.users.size} users`,
+		`${server}`,
+	];
+	setInterval(function() {
+		let activity = Activities[Math.floor(Math.random() * Activities.length)];
+		client.user.setActivity(activity, { type: 'PLAYING' });
+	}, 15000);
 	console.log('Ready for Stalk!!');
 });
 
 client.on('message', async message => {
+	let options = {
+		songQ: queue,
+		isplay: playing,
+		songStatus: Status,
+	};
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
@@ -95,7 +114,7 @@ client.on('message', async message => {
 
 	try {
 		// Executes the commands if provides message and args
-		command.execute(message, args);
+		command.execute(message, args, client, options);
 	}
 	catch (error) {
 		console.error(error);

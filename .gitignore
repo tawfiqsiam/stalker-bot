@@ -7,3 +7,7 @@
 #Prevent Masive Upload of Node Deps
 node_modules/
 node_modules/*
+
+#Logs
+log.txt
+pid.txt
