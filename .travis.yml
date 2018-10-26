@@ -21,7 +21,7 @@ branches:
   - master
   - deployment
   - development
-  - dev
+  - /^dev.*$/
 cache:
   directories:
   - node_modules
