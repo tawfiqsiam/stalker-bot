@@ -1,6 +1,6 @@
 {
   "name": "stalker-bot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Custom Halo/Warframe/League of legends/Server Discord bot",
   "main": "bot.js",
   "scripts": {

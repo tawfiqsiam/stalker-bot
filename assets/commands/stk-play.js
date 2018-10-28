@@ -36,11 +36,11 @@ module.exports = {
 					}
 					const ytEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
-						.setThumbnail(results[0].thumbnails.high.url)
 						.setColor('#7f1515')
 						.addField('Title', `** [${results[0].title}](https://youtu.be/${results[0].id}) **`, false)
 						.addField('Channel', results[0].channel.title, true)
 						.addField('Queue Position', `**${Songs.Queue.length == 0 ? 'Now Playing' : Songs.Queue.length}**`, true)
+						.setImage(results[0].thumbnails.high.url)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 					if(Status.Playing == true) {
@@ -62,7 +62,7 @@ module.exports = {
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 						.setColor('#7f1515')
 						.addField('Requested playlist: ', `** [${playlist.title}](${playlist.url}) ** :notes:`, false)
-						.addField('Publish Date', `** ${playlist.publishedAt.getFullYear()} **`, false)
+						.addField('Publish Date', `** ${playlist.publishedAt.getUTCFullYear()} **`, false)
 						.addField('By', `** ${playlist.channel.title} **`)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
@@ -106,25 +106,30 @@ module.exports = {
 
 
 		function play() {
-			let currentplay = Songs.Queue[0];
+			Songs = options.songQ.get(message.guild.id);
+			let currentplay = (Songs !== undefined && Songs !== null) ? Songs.Queue[0] : null;
 			voiceChannel.join().then(connection => {
-				let stream = ytdl(currentplay.url, { filter: 'audioonly' });
-				let dispatcher = connection.playStream(stream);
-				dispatcher.on('end', () => {
+				if(currentplay !== null) {
+					let stream = ytdl(currentplay.url, { filter: 'audioonly' });
+					let dispatcher = connection.playStream(stream);
 					Songs.Queue.shift();
-					console.log('shifted the queue');
-					if (Songs.Queue.length > 0) {
-						console.log('enter to queue next -->' + Songs.Queue.length);
-						currentplay = Songs.Queue[0];
-						play();
-					}
-					else {
-						Status.Playing = false;
-						options.isplay.set(message.guild.id, Status);
-						options.songQ.delete(message.guild.id);
-						voiceChannel.leave();
-					}
-				});
+					dispatcher.on('end', () => {
+						if (Songs.Queue.length > 0) {
+							console.log('enter to queue next -->' + Songs.Queue.length);
+							currentplay = Songs.Queue[0];
+							play();
+						}
+						else {
+							Status.Playing = false;
+							options.isplay.set(message.guild.id, Status);
+							options.songQ.delete(message.guild.id);
+							message.channel.send(`** No more songs available, I will Leave the ${voiceChannel.name} channel in 15 seconds ** :stopwatch:`);
+							setInterval(function() {
+								voiceChannel.leave();
+							}, 15000);
+						}
+					});
+				}
 			});
 		}
 	},

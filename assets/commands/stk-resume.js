@@ -26,9 +26,14 @@ module.exports = {
 		let stSong = options.songStatus.get(message.guild.id) || {};
 		if(!stSong.Paused)stSong.Paused = false;
 		if(stSong.Paused == true) {
-			voiceChannel.connection.dispatcher.resume();
-			message.channel.send(actionEmbed);
-			stSong.Paused = false;
+			if(voiceChannel.connection !== null) {
+				voiceChannel.connection.dispatcher.resume();
+				message.channel.send(actionEmbed);
+				stSong.Paused = false;
+			}
+			else{
+				message.channel.send('** Nothing is playing, use play first** :x:');
+			}
 		}
 		else{
 			message.channel.send(actionError);

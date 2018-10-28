@@ -18,16 +18,22 @@ module.exports = {
 			.addField('**__Song Status__**', '** Skkiped  :fast_forward:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
+
 		const actionError = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 			.setColor('#7f1515')
-			.addField('**__Song Error__**', '** The bot is currently paused, use resume and after useskip :x:**', true)
+			.addField('**__Song Error__**', '** The bot is currently paused, please use resume and after use skip :x:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 		if(stSong.Paused == false) {
-			voiceChannel.connection.dispatcher.end();
-			message.channel.send(actionEmbed);
-			stSong.Paused = false;
+			if(voiceChannel.connection !== null) {
+				voiceChannel.connection.dispatcher.end();
+				message.channel.send(actionEmbed);
+				stSong.Paused = false;
+			}
+			else{
+				message.channel.send('** Nothing is playing, please use play (song)** :x:');
+			}
 		}
 		else{
 			message.channel.send(actionError);
