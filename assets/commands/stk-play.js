@@ -96,7 +96,7 @@ module.exports = {
 			options.isplay.set(message.guild.id, Status);
 			_videos.forEach(video => {
 				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`,
-					'requestby': message.author.name,
+					'requestby': message.author.id,
 					'songName': video.title,
 				});
 				options.songQ.set(message.guild.id, Songs);
@@ -112,8 +112,8 @@ module.exports = {
 				if(currentplay !== null) {
 					let stream = ytdl(currentplay.url, { filter: 'audioonly' });
 					let dispatcher = connection.playStream(stream);
-					Songs.Queue.shift();
 					dispatcher.on('end', () => {
+						Songs.Queue.shift();
 						if (Songs.Queue.length > 0) {
 							console.log('enter to queue next -->' + Songs.Queue.length);
 							currentplay = Songs.Queue[0];
