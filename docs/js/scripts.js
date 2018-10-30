@@ -56,5 +56,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	ScrollReveal().reveal('.right-reveal', RightOptions);
 	ScrollReveal().reveal('.left-reveal', LeftOptions);
 	ScrollReveal().reveal('.top-reveal', TopOptions);
-	ScrollReveal().reveal('.bot-reveal', BottomOptions);
+    ScrollReveal().reveal('.bot-reveal', BottomOptions);
+    
+    $(".badges").hover(function(){
+        $(this).addClass('animated bounce');
+    });
 });
