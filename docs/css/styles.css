@@ -74,11 +74,22 @@ html.sr .reveal-logo {
 }
 
 .text-footer{
-    color: #5a5a5e !important;
+    color: #ffffff !important;
+    text-decoration: none;
 }
 
 .text-footer:hover{
-    color: #FAFAFA;
+    color: #8f2222;
+}
+
+.main-footer{
+    padding: 1.5rem;
+    height: 25vh;
+    bottom: 0;
+}
+
+.p-wrapper{
+    padding-bottom: 40vh;
 }
 
 /* Animmation Keyframes Styles */

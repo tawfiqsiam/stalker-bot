@@ -11,63 +11,81 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.11/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/themes/red-white.css"> 
 
         <script src="https://unpkg.com/scrollreveal@4.0.4/dist/scrollreveal.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="./js/scripts.js"></script>
     </head>
     <body>
         <main class="d-flex flex-column container-fluid px-0">
-            <section class="justify-content-center row px-0">
-                <article class="col-12 img-fluid reveal-logo my-5 py-3 px-1 mx-1">
-                    <img src="./images/SB_DS-LOGO.png" alt="Logo" class="app-logo">
-                </article>
-                <article class="row justify-content-center my-2 mx-0 px-0">
-                    <div class="intro col-12 top-reveal">Hello I'm Stalker Bot | Powered by Discord.JS</div>
-                    <div class="tagline col-12 mb-1 right-reveal">By <strong>@D4RKAR117</strong> | Student | Codder | Linux User | Gamer </div>
-                    <div class="tagline col-12 mt-1 bot-reveal">In Develop since 2018 </div>
-                </article>
-            </section>
-            <!-- * Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
-            <section class="justify-content-center row">
-                <div data-toggle="tooltip" data-placement="top" title="Visit my repo!!" class="icons-social bounce col-sm-6 my-sm-1 my-md-2 col-md-2 left-reveal">
-                    <a href="https://github.com/D4RKAR117/stalker-bot">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <div data-toggle="tooltip" data-placement="top" title="Visit my human twitter!!" class="icons-social bounce col-sm-6 my-sm-1 my-md-2 col-md-2 top-reveal">
-                    <a href="https://twitter.com/D4RKAR117">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </div>
-                <div data-toggle="tooltip" data-placement="top" title="Invite me to your Discord server!!" class="icons-social bounce col-sm-6  my-sm-1 my-md-2 col-md-2 bot-reveal">
-                    <a href="https://discordapp.com/api/oauth2/authorize?client_id=496184604559015936&permissions=8&scope=bot">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                </div>
-                <div data-toggle="tooltip" data-placement="top" title="See my origins !!" class="icons-social bounce col-sm-6  my-sm-1 my-md-2 col-md-2 right-reveal">
-                    <a href="https://github.com/discordjs/discord.js">
-                        <i class="fab fa-js"></i>
-                    </a>
-                </div>
-            </section>
-
-            <footer class="row justitify-content-center px-2 py-3">
-                <section class="col-sm-12 col-md-6">
-                    <div class="mx-md-3 my-sm-2">
-                        <h2 class="text-footer">Powered by Discord JS</h2>
+            <div class="wrapper p-wrapper">
+                <section class="justify-content-center row px-0">
+                    <article class="col-12 img-fluid reveal-logo my-5 py-3 px-1 mx-1">
+                        <img src="./images/SB_DS-LOGO.png" alt="Logo" class="app-logo">
+                    </article>
+                    <article class="row justify-content-center my-2 mx-0 px-0">
+                        <div class="intro col-12 top-reveal">Hello I'm Stalker Bot | Powered by Discord.JS</div>
+                        <div class="tagline col-12 mb-1 right-reveal">By <strong>@D4RKAR117</strong> | Student | Coder | Linux User | Gamer </div>
+                        <div class="tagline col-12 mt-1 bot-reveal">In Development Since 2018 </div>
+                    </article>
+                </section>
+                <!-- * Find your icons from here - https://fontawesome.com/icons?d=gallery&s=brands -->
+                <section class="justify-content-center row">
+                    <div data-toggle="tooltip" data-placement="top" title="Visit my repo!!" class="icons-social badges col-sm-6 my-sm-1 my-md-2 col-md-2 left-reveal">
+                        <a href="https://github.com/Co-Op-Development/stalker-bot">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <div data-toggle="tooltip" data-placement="top" title="Visit my human twitter!!" class="icons-social badges col-sm-6 my-sm-1 my-md-2 col-md-2 top-reveal">
+                        <a href="https://twitter.com/D4RKAR117">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    <div data-toggle="tooltip" data-placement="top" title="Invite me to your Discord server!!" class="icons-social badges col-sm-6  my-sm-1 my-md-2 col-md-2 bot-reveal">
+                        <a href="" onclick="inviteBot()" class="sweetTrigger">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                    <div data-toggle="tooltip" data-placement="top" title="See my origins !!" class="icons-social badges col-sm-6  my-sm-1 my-md-2 col-md-2 right-reveal">
+                        <a href="https://github.com/discordjs/discord.js">
+                            <i class="fab fa-js"></i>
+                        </a>
                     </div>
                 </section>
-                <section class="col-sm-12 col-md-6">
-                    <div class="mx-md-3 my-sm-2">
-                        <h2 class="text-footer">Official Stalker Bot Server!!</h2>
+            </div>
+            <footer class="row main-footer">
+                <section class="col-sm-12 col-md-6 my-sm-5 right-reveal">
+                    <div class="mx-md-3">
+                        <a href="" class="text-footer">
+                            <h2 class="text-footer">
+                                <i class="fab fa-js bot-reveal"></i>
+                                Powered by Discord JS
+                            </h2>
+                        </a>
+                    </div>
+                </section>
+                <section class="col-sm-12 col-md-6 my-sm-5 left-reveal">
+                    <div class="mx-md-3">
+                        <a href="" onclick="joinDiscord()" class="sweetTrigger text-footer">
+                            <h2 class="text-footer ">
+                                <i class="fab fa-discord bot-reveal"></i>
+                                 Official Stalker Bot Support Server!!
+                            </h2>
+                        </a>
                     </div>
                 </section>
             </footer>
         </main>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.11/dist/sweetalert2.all.min.js"></script>
+        <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+        <!-- ? need more test <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> --> 
+        <script src="js/alerts.js"></script>
     </body>
 </html>
