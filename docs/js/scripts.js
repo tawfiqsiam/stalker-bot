@@ -59,6 +59,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     ScrollReveal().reveal('.bot-reveal', BottomOptions);
     
     $(".badges").hover(function(){
-        $(this).addClass('animated bounce');
+        $(this).toggleClass('animated bounce');
     });
 });
