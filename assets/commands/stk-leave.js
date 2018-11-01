@@ -27,13 +27,8 @@ module.exports = {
 		options.isplay.set(message.guild.id, Status);
 		options.songStatus.set(message.guild.id, stSong);
 		options.songQ.delete(message.guild.id);
-		if(voiceChannel.connection.dispatcher) {
-			voiceChannel.connection.dispatcher.end();
-		}
-		else{
-			voiceChannel.connection.disconnect();
-		}
-		if(voiceChannel.connection !== null)voiceChannel.leave();
+		voiceChannel.connection.dispatcher = null;
+		voiceChannel.leave();
 
 		message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
 

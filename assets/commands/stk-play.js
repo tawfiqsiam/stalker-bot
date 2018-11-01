@@ -117,15 +117,18 @@ module.exports = {
 						if (Songs.Queue.length > 0) {
 							console.log('enter to queue next -->' + Songs.Queue.length);
 							currentplay = Songs.Queue[0];
+							dispatcher = null;
 							play();
 						}
 						else {
+							dispatcher = null;
 							Status.Playing = false;
 							options.isplay.set(message.guild.id, Status);
 							options.songQ.delete(message.guild.id);
 							message.channel.send(`** No more songs available, I will Leave the ${voiceChannel.name} channel in 15 seconds ** :stopwatch:`);
-							setInterval(function() {
-								voiceChannel.leave();
+							setTimeout(function() {
+								let command = _client.commands.get('leave');
+								command.execute(message, _args, _client, options);
 							}, 15000);
 						}
 					});
