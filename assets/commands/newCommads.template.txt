@@ -1,0 +1,12 @@
+/* eslint no-unused-vars: "off" */
+
+module.exports = {
+	name: 'command name',
+	usage: 'parameters description',
+	aliases: ['aliases'],
+	guildOnly: true,
+	description: 'Command Description',
+	execute(message, _args, _client, options) {
+		
+	},
+};
