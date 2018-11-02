@@ -1,8 +1,6 @@
 /* eslint no-unused-vars: "off" */
 
 const Discord = require('discord.js');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube(process.env.API_TOKEN);
 
 
 module.exports = {
