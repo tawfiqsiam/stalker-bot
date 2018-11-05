@@ -40,6 +40,7 @@ client.on('ready', () => {
 	let Activities = [`on ${client.guilds.size} servers`,
 		`with ${client.users.size} users`,
 		`${server}`,
+		`prefix: ${prefix}`,
 	];
 	setInterval(function() {
 		let activity = Activities[Math.floor(Math.random() * Activities.length)];
@@ -117,8 +118,17 @@ client.on('message', async message => {
 		command.execute(message, args, client, options);
 	}
 	catch (error) {
-		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		const embedErr = new Discord.RichEmbed()
+			.setTitle('Stalker Errors')
+			.addField('** Command Errored **', `${command}`)
+			.addField('** Error :x:**', 'There was an error trying to execute that command')
+			.setDescription(`Error log: ${error}`)
+			.setTimestamp()
+			.setColor('#db3b3b')
+			.setFooter('Please contact Support');
+
+		console.error(`New Error log in the guild: ${message.guild.name}, Error log: ${error}`);
+		message.reply(embedErr);
 	}
 });
 
