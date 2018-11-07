@@ -22,15 +22,24 @@ module.exports = {
 		if (!permissions.has('SPEAK')) {
 			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 		}
+		if(voiceChannel.connection != null) {
+			return message.channel.send('** I can\'t leave if im not connected :x:**');
+		}
+
 		if(Status.Playing == true || !Status.Playing)Status.Playing = false;
 		if(stSong.Paused == true || !stSong.Paused)stSong.Paused = false;
-		options.isplay.set(message.guild.id, Status);
-		options.songStatus.set(message.guild.id, stSong);
-		options.songQ.delete(message.guild.id);
-		voiceChannel.connection.dispatcher = null;
-		voiceChannel.leave();
+		if(voiceChannel.connection != null) {
+			options.isplay.set(message.guild.id, Status);
+			options.songStatus.set(message.guild.id, stSong);
+			options.songQ.delete(message.guild.id);
+			voiceChannel.connection.dispatcher = null;
+			voiceChannel.leave();
+			message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
+		}
+		else{
+			message.channel.send('** I can\'t leave if i\'m not connected :x:**');
+		}
 
-		message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
 
 	},
 };
