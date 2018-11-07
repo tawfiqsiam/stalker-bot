@@ -8,8 +8,10 @@
     "lint": "eslint --debug bot.js",
     "wincheck": "node ./travis/OsCheck/WinPreInstall.js",
     "windows-install": "npm i --global --production --save windows-build-tools ffmpeg-binaries",
-    "start": "nohup node bot.js > log.txt 2>&1 & echo $! > pid.txt",
-    "stop": "kill $(tail pid.txt)"
+    "start": "pm2 start bot.js",
+    "launch-dev": "pm2 start bot.js  --watch ",
+	"stop": "pm2 stop bot",
+	"show-logs": "pm2 logs bot"
   },
   "repository": {
     "type": "git",

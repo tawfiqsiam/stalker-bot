@@ -120,14 +120,14 @@ client.on('message', async message => {
 	catch (error) {
 		const embedErr = new Discord.RichEmbed()
 			.setTitle('Stalker Errors')
-			.addField('** Command Errored **', `${command}`)
+			.addField('** Command Errored **', `${command.name}`)
 			.addField('** Error :x:**', 'There was an error trying to execute that command')
-			.setDescription(`Error log: ${error}`)
+			.setDescription(`**Error log:** ${error}`)
 			.setTimestamp()
 			.setColor('#db3b3b')
 			.setFooter('Please contact Support');
 
-		console.error(`New Error log in the guild: ${message.guild.name}, Error log: ${error}`);
+		console.error(`New Error log in the guild: ${message.guild.name}, Error log: ${error} Command: ${command.name}`);
 		message.reply(embedErr);
 	}
 });

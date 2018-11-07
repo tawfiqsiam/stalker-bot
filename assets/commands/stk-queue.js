@@ -39,34 +39,33 @@ module.exports = {
 						}
 					}
 
-					msg.edit(queueEmbed);
-
+					let mess = await msg.edit(queueEmbed);
 					if(queueChunked.length > 1) {
-						if(_args[1])await msg.clearReactions();
-						if(tabSelection > 1 != false)await msg.react('◀');
-						if(tabSelection < queueChunked.length != false)await msg.react('▶');
+						if(_args[1]) await mess.clearReactions();
+						if(tabSelection > 1 != false)await mess.react('◀');
+						if(tabSelection < queueChunked.length != false)await mess.react('▶');
 
 						const filter = (reaction, user) => {
 							return ['◀', '▶'].includes(reaction.emoji.name) && user.id !== _client.user.id;
 						};
 
-						const collector = msg.createReactionCollector(filter, { time: 120000 });
+						const collector = mess.createReactionCollector(filter, { time: 120000 });
 
-						collector.on('collect', (reaction, reactionCollector) => {
+						collector.on('collect', (reaction) => {
 
 							const command = _client.commands.get('queue');
 							if (reaction.emoji.name == '◀') {
 								let newSelection = (tabSelection > 1) ? (tabSelection - 1) : null;
-								command.execute(msg, [newSelection, true], _client, options);
+								command.execute(mess, [newSelection, true], _client, options);
 							}
 							else if(reaction.emoji.name == '▶') {
 								let newSelection = (tabSelection < queueChunked.length) ? (tabSelection + 1) : null;
-								command.execute(msg, [newSelection, true], _client, options);
+								command.execute(mess, [newSelection, true], _client, options);
 							}
 						});
 
 						collector.on('end', collected => {
-							msg.clearReactions();
+							mess.clearReactions();
 						});
 					}
 				}
