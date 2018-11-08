@@ -25,19 +25,19 @@ module.exports = {
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 		let stSong = options.songStatus.get(message.guild.id) || {};
-		if(!stSong.Paused)stSong.Paused = false;
-		if(stSong.Paused == false) {
-			if(voiceChannel.connection !== null) {
+		if (!stSong.Paused) stSong.Paused = false;
+		if (stSong.Paused == false) {
+			if (voiceChannel.connection !== null) {
 
 				voiceChannel.connection.dispatcher.pause();
 				message.channel.send(actionEmbed);
 				stSong.Paused = true;
 			}
-			else{
+			else {
 				message.channel.send('** Nothing is playing, please use play (song) first** :x:');
 			}
 		}
-		else{
+		else {
 			message.channel.send(actionError);
 		}
 		options.songStatus.set(message.guild.id, stSong);

@@ -1,17 +1,19 @@
 {
   "name": "stalker-bot",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Custom Halo/Warframe/League of legends/Server Discord bot",
   "main": "bot.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint --debug bot.js",
-    "wincheck": "node ./travis/OsCheck/WinPreInstall.js",
+    "wincheck": "node ./test/OsCheck/WinPreInstall.js",
     "windows-install": "npm i --global --production --save windows-build-tools ffmpeg-binaries",
     "start": "pm2 start bot.js",
     "launch-dev": "pm2 start bot.js  --watch ",
     "stop": "pm2 stop bot",
-    "show-logs": "pm2 logs bot"
+    "restart": "pm2 restart bot",
+    "show-logs": "pm2 logs bot",
+    "clear-logs": "pm2 flush bot"
   },
   "repository": {
     "type": "git",

@@ -24,18 +24,18 @@ module.exports = {
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 		let stSong = options.songStatus.get(message.guild.id) || {};
-		if(!stSong.Paused)stSong.Paused = false;
-		if(stSong.Paused == true) {
-			if(voiceChannel.connection !== null) {
+		if (!stSong.Paused) stSong.Paused = false;
+		if (stSong.Paused == true) {
+			if (voiceChannel.connection !== null) {
 				voiceChannel.connection.dispatcher.resume();
 				message.channel.send(actionEmbed);
 				stSong.Paused = false;
 			}
-			else{
-				message.channel.send('** Nothing is playing, use play first** :x:');
+			else {
+				message.channel.send('** Nothing is playing, use `(prefix) play` first** :x:');
 			}
 		}
-		else{
+		else {
 			message.channel.send(actionError);
 		}
 		options.songStatus.set(message.guild.id, stSong);

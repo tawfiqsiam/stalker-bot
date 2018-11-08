@@ -13,7 +13,7 @@ module.exports = {
 		let stSong = options.songStatus.get(message.guild.id) || {};
 
 		if (!voiceChannel) {
-			return message.reply('please join a voice channel first!');
+			return message.reply('Please join a voice channel first!');
 		}
 		const permissions = voiceChannel.permissionsFor(message.client.user);
 		if (!permissions.has('CONNECT')) {
@@ -23,12 +23,17 @@ module.exports = {
 			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 		}
 
-		if(Status.Playing == true || !Status.Playing)Status.Playing = false;
-		if(stSong.Paused == true || !stSong.Paused)stSong.Paused = false;
+		if (Status.Playing == true || !Status.Playing) Status.Playing = false;
+		if (stSong.Paused == true || !stSong.Paused) stSong.Paused = false;
 		options.isplay.set(message.guild.id, Status);
 		options.songStatus.set(message.guild.id, stSong);
 		options.songQ.delete(message.guild.id);
-		voiceChannel.leave();
-		message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
+		if(voiceChannel.connection != null) {
+			voiceChannel.leave();
+			message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
+		}
+		else{
+			message.channel.send('**I can\'t leave, if i\'m not connected use `(prefix)join` instead** :x:');
+		}
 	},
 };
