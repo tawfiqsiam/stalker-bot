@@ -22,7 +22,7 @@ module.exports = {
 		const actionError = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 			.setColor('#7f1515')
-			.addField('**__Song Error__**', '** The bot is currently paused, please use resume and after use skip :x:**', true)
+			.addField('**__Song Error__**', '** The bot is currently paused, please use `(prefix) resume` and after use `(prefix) skip` :x:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
 		if (stSong.Paused == false) {
@@ -32,7 +32,7 @@ module.exports = {
 				stSong.Paused = false;
 			}
 			else {
-				message.channel.send('** Nothing is playing, please use play (song)** :x:');
+				message.channel.send('** Nothing is playing, please use `(prefix) play (song)`** :x:');
 			}
 		}
 		else {

@@ -32,7 +32,7 @@ module.exports = {
 				stSong.Paused = false;
 			}
 			else {
-				message.channel.send('** Nothing is playing, use play first** :x:');
+				message.channel.send('** Nothing is playing, use `(prefix) play` first** :x:');
 			}
 		}
 		else {

@@ -31,7 +31,7 @@ module.exports = {
 				});
 		}
 		else {
-			message.channel.send('**Nothing is playing at this time, please use play (song) to play a song :x:**');
+			message.channel.send('**Nothing is playing at this time, please use `(prefix) play (song)` to play a song :x:**');
 		}
 	},
 };
