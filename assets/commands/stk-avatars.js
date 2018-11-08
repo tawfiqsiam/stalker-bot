@@ -23,7 +23,7 @@ module.exports = {
 
 			message.channel.send(EmbedAvatar);
 		}
-		else{
+		else {
 			const avatarList = message.mentions.users.map(user => {
 				const EmbedAvatars = new Discord.RichEmbed()
 					.setColor('#467ac9')

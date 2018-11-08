@@ -23,8 +23,8 @@ module.exports = {
 			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 		}
 
-		if(Status.Playing == true || !Status.Playing)Status.Playing = false;
-		if(stSong.Paused == true || !stSong.Paused)stSong.Paused = false;
+		if (Status.Playing == true || !Status.Playing) Status.Playing = false;
+		if (stSong.Paused == true || !stSong.Paused) stSong.Paused = false;
 		options.isplay.set(message.guild.id, Status);
 		options.songStatus.set(message.guild.id, stSong);
 		options.songQ.delete(message.guild.id);

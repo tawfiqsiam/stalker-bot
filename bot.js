@@ -130,6 +130,8 @@ client.on('message', async message => {
 		console.error(`New Error log in the guild: ${message.guild.name}, Error log: ${error} Command: ${command.name}`);
 		message.reply(embedErr);
 	}
+
+	process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 });
 
 // login to Discord with your app's token

@@ -7,15 +7,15 @@ sudo: required
 before_install:
 - sudo apt-get install dos2unix
 install:
-- dos2unix ./travis/test.sh
-- dos2unix ./travis/send.sh
+- dos2unix ./test/test.sh
+- dos2unix ./test/send.sh
 - dos2unix ./build.sh
 - npm install -g eslint --save
 - npm install
 jobs:
   include:
   - stage: test
-  - script: bash ./travis/test.sh
+  - script: bash ./test/test.sh
 branches:
   only:
   - master
@@ -26,11 +26,8 @@ cache:
   directories:
   - node_modules
 after_success:
-- chmod +x ./travis/send.sh
-- "./travis/send.sh success $WEBHOOK_URL"
+- chmod +x ./test/send.sh
+- "./test/send.sh success $WEBHOOK_URL"
 after_failure:
-- chmod +x ./travis/send.sh
-- "./travis/send.sh failure $WEBHOOK_URL"
-env:
-  global:
-    secure: FnkKBhvTxILk9aTbC8VUeMtBL03pOvzxhgv2m97GkiD+Pqz2JhsMDnCpwzZVLoL7xPh7WTd7AVp+47yeGHHVEX1MzjGlzLOP4i6Ss4mQ+3kafy8KidCdP9sYl2F3tiFONVYBCaXzLo0BzCA4hJ4248J5TTSk8eMeOV9FRNQsIYR47srTQauYGmWNB72rwPRG5JvM315TtzDT6PoitO7KQbSgJ+MDuKA2lPq1c0ZylH4JrhoADqfXdaTcgq1PT2LU0MVHZrrJCx64dM2zDLaO8uo6b2zrlqvWtDbmv0iTROb77nMHpVdQjdiftGEgtfpCoWAD3iFYOqoVNL9Y11siKs5irQxpgrR6chBVfpk4Ht97hWTmX3p7o9KLVexDw3w/JzShlzsy0VN1ik7RAyShX3wI5K9d1n00cgjliKzHKDbzby4DVK99E61Ou8xF37O6LM+JcxqhXT57V+4gKTnvSNydYDGaSJT5KM5ke8FQcfWJOAogTCdX9nriAWZOFgSY5ihblmC96l1RG6BuOodWzvD75F+OV5gHRApAUrScnejjVRQ6Ch4CzE/xb6nYeWCGQdFRGMh4RJ3LmqbH7TiUAKCABPba68pN+nyK2sheQa9ex0xahuIXiohuNSspV1EN7z7YkPiemNQL1jGlD40qa6l8rpspnFG9uX1wnpsyy0o=
+- chmod +x ./test/send.sh
+- "./test/send.sh failure $WEBHOOK_URL"

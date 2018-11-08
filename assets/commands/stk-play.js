@@ -17,8 +17,8 @@ module.exports = {
 		let Songs = options.songQ.get(message.guild.id) || {};
 		let Status = options.isplay.get(message.guild.id) || {};
 		let isPlaylist = false;
-		if(!Songs.Queue)Songs.Queue = [];
-		if(!Status.Playing)Status.Playing = false;
+		if (!Songs.Queue) Songs.Queue = [];
+		if (!Status.Playing) Status.Playing = false;
 		options.isplay.set(message.guild.id, Status);
 		const { voiceChannel } = message.member;
 		if (urlCheck(`${_args}`.split(',').join(' ')) == false) {
@@ -43,10 +43,10 @@ module.exports = {
 						.setImage(results[0].thumbnails.high.url)
 						.setTimestamp()
 						.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-					if(Status.Playing == true) {
+					if (Status.Playing == true) {
 						addToQueue(results);
 					}
-					else{
+					else {
 						addToQueue(results);
 						play();
 					}
@@ -71,10 +71,10 @@ module.exports = {
 					playlist.getVideos()
 						.then(videos => {
 							const playlen = videos.length;
-							if(Status.Playing == true) {
+							if (Status.Playing == true) {
 								addToQueue(videos, playlen, playtitle);
 							}
-							else{
+							else {
 								addToQueue(videos, playlen, playtitle);
 								play();
 							}
@@ -83,7 +83,6 @@ module.exports = {
 				})
 				.catch(console.log);
 		}
-		process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
 
 		function addToQueue(_videos, _plNumber, _plTitle) {
 			const ytEmbed = new Discord.RichEmbed()
@@ -92,10 +91,11 @@ module.exports = {
 				.addField(':white_check_mark: Added: ', `**${isPlaylist ? `${_plTitle} with ${_plNumber} ` : Songs.Queue.length + 1}** songs are now in the queue :notes: :notes:`, true)
 				.setTimestamp()
 				.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-			if(Status.Playing == false)Status.Playing = true;
+			if (Status.Playing == false) Status.Playing = true;
 			options.isplay.set(message.guild.id, Status);
 			_videos.forEach(video => {
-				Songs.Queue.push({ 'url':`https://www.youtube.com/watch?v=${video.id}`,
+				Songs.Queue.push({
+					'url': `https://www.youtube.com/watch?v=${video.id}`,
 					'requestby': message.author.id,
 					'songName': video.title,
 				});
@@ -109,8 +109,10 @@ module.exports = {
 			Songs = options.songQ.get(message.guild.id);
 			let currentplay = (Songs !== undefined && Songs !== null) ? Songs.Queue[0] : null;
 			voiceChannel.join().then(connection => {
-				if(currentplay !== null) {
-					let stream = ytdl(currentplay.url, { filter: 'audioonly' });
+				if (currentplay !== null) {
+					let stream = ytdl(currentplay.url, {
+						filter: 'audioonly',
+					});
 					let dispatcher = connection.playStream(stream);
 					dispatcher.on('end', () => {
 						Songs.Queue.shift();
@@ -137,4 +139,3 @@ module.exports = {
 		}
 	},
 };
-

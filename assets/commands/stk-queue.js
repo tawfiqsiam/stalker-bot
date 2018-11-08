@@ -13,10 +13,11 @@ module.exports = {
 		let Songs = options.songQ.get(message.guild.id);
 		let currentQueue = (Songs !== undefined && Songs !== null) ? Songs.Queue : null;
 		let tabSelection = (_args[0] == undefined || _args == null) ? 1 : _args[0];
-		if(currentQueue !== null) {
-			let queueChunked = chunk(currentQueue, 10);
+		let continueToken = false;
+		if (currentQueue !== null) {
+			let queueChunked = chunk(currentQueue, 5);
 			if (tabSelection != 0) {
-				if(tabSelection <= queueChunked.length) {
+				if (tabSelection <= queueChunked.length) {
 					const msg = (_args[1] == null || _args[1] == undefined) ? await message.channel.send('`Searching Music Queue ...`') : message;
 					let queueEmbed = new Discord.RichEmbed()
 						.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
@@ -27,7 +28,7 @@ module.exports = {
 						const song = elements[indexElements];
 						const currentSong = currentElement[0];
 						queueEmbed.setTitle('Current Music Queue');
-						if(indexElements == 0) {
+						if (indexElements == 0) {
 							queueEmbed.addField('**Now Playing**', `** [${currentSong.songName}](${currentSong.url}) | Requested by: <@${currentSong.requestby}>  **`, false)
 								.addBlankField(true)
 								.addField('** :arrow_down: == Up Next == :arrow_down:**', `${elements.length - 1} Songs`, false);
@@ -40,10 +41,71 @@ module.exports = {
 					}
 
 					let mess = await msg.edit(queueEmbed);
-					if(queueChunked.length > 1) {
-						if(_args[1]) await mess.clearReactions();
-						if(tabSelection > 1 != false)await mess.react('◀');
-						if(tabSelection < queueChunked.length != false)await mess.react('▶');
+					let canForward = tabSelection < queueChunked.length;
+					let canBackward = tabSelection > 1;
+					if (queueChunked.length > 1) {
+						console.log(`Queue Chunked size: ${queueChunked.length} and tab selection: ${tabSelection} and args: ${_args[1]}`);
+						if(_args[1] != undefined && _args[1] == true) {
+							mess.clearReactions().then(() =>{
+								if (canBackward) {
+									mess.react('◀').then(() => {
+										if (canForward) {
+											mess.react('▶').then(() => {
+												continueToken = true;
+											}).catch(err => {
+												console.log(`Error Reacting with ▶ | ${err}`);
+											});
+											continueToken = true;
+										}
+										else{
+											continueToken = true;
+										}
+									}).catch(err => {
+										console.log(`Error Reacting with ◀ | ${err}`);
+									});
+								}
+								else if(canForward) {
+									mess.react('▶').then(() => {
+										continueToken = true;
+									}).catch(err => {
+										console.log(`Error Reacting with ▶ | ${err}`);
+									});
+									continueToken = true;
+								}
+
+							}).catch(err => {
+								console.log(`Error Clearing Reactions | ${err}`);
+							});
+						}
+						else if (canBackward) {
+							mess.react('◀').then(() => {
+								if (canForward) {
+									mess.react('▶').then(() => {
+										continueToken = true;
+									}).catch(err => {
+										console.log(`Error Reacting with ▶ | ${err}`);
+									});
+									continueToken = true;
+								}
+								else{
+									continueToken = true;
+								}
+							}).catch(err => {
+								console.log(`Error Reacting with ◀ | ${err}`);
+							});
+						}
+						else if(canForward) {
+							mess.react('▶').then(() => {
+								continueToken = true;
+							}).catch(err => {
+								console.log(`Error Reacting with ▶ | ${err}`);
+							});
+							continueToken = true;
+						}
+						else{
+							console.log('Can\'t create the collector');
+						}
+
 
 						const filter = (reaction, user) => {
 							return ['◀', '▶'].includes(reaction.emoji.name) && user.id !== _client.user.id;
@@ -55,29 +117,38 @@ module.exports = {
 
 							const command = _client.commands.get('queue');
 							if (reaction.emoji.name == '◀') {
-								let newSelection = (tabSelection > 1) ? (tabSelection - 1) : null;
+								let newSelection = (canBackward) ? (tabSelection - 1) : null;
+								console.log(`By backward new selection ${newSelection}`);
+								collector.stop();
 								command.execute(mess, [newSelection, true], _client, options);
 							}
-							else if(reaction.emoji.name == '▶') {
-								let newSelection = (tabSelection < queueChunked.length) ? (tabSelection + 1) : null;
+							else if (reaction.emoji.name == '▶') {
+								let newSelection = (canForward) ? (tabSelection + 1) : null;
+								console.log(`By forward new selection ${newSelection}`);
+								collector.stop();
 								command.execute(mess, [newSelection, true], _client, options);
 							}
 						});
 
 						collector.on('end', collected => {
-							mess.clearReactions();
+							mess.clearReactions().then(() => {
+								continueToken = false;
+								console.log('triggered end');
+							}).catch(err => {
+								console.log(`Error Clearing Reactions | ${err} | Reactions collected on end ${collected}`);
+							});
 						});
 					}
 				}
-				else{
+				else {
 					message.channel.send('**This tab number doesn\'t exist :x:**');
 				}
 			}
-			else{
+			else {
 				message.channel.send('**You can search for tab 0 :x:**');
 			}
 		}
-		else{
+		else {
 			message.channel.send('**Nothing is playing at this time, please use play (song) to play a song :x:**');
 		}
 

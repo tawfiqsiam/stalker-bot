@@ -1,4 +1,6 @@
-const { prefix } = require('../config/botcfg');
+const {
+	prefix,
+} = require('../config/botcfg');
 
 module.exports = {
 	name: 'help',
@@ -8,23 +10,27 @@ module.exports = {
 	cooldown: 5,
 	execute(_message, _args) {
 		const data = [];
-		const { commands } = _message.client;
+		const {
+			commands,
+		} = _message.client;
 
 		if (!_args.length) {
 			/**
-             * Append some strings, .map() over the commands Collection,
-             * and add an additional string to let the user know how to trigger information
-             * about a specific command.
-             *
-             * Since help messages can get messy, you'll be DMing it to the message author instead of posting it
-             * in the requested channel.
-             * Catch if the User has DM blocked
-             */
+			 * Append some strings, .map() over the commands Collection,
+			 * and add an additional string to let the user know how to trigger information
+			 * about a specific command.
+			 *
+			 * Since help messages can get messy, you'll be DMing it to the message author instead of posting it
+			 * in the requested channel.
+			 * Catch if the User has DM blocked
+			 */
 			data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
 			data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
-			return _message.author.send(data, { split: true })
+			return _message.author.send(data, {
+				split: true,
+			})
 				.then(() => {
 					if (_message.channel.type === 'dm') return;
 					_message.reply('I\'ve sent you a DM with all my commands!');
@@ -52,6 +58,8 @@ module.exports = {
 
 		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
-		_message.channel.send(data, { split: true });
+		_message.channel.send(data, {
+			split: true,
+		});
 	},
 };
