@@ -11,10 +11,9 @@ module.exports = {
 	guildOnly: true,
 	description: 'Get stalker bot current song',
 	execute(message, _args, _client, options) {
-		const { voiceChannel } = message.member;
 		let Songs = options.songQ.get(message.guild.id);
 		let currentQueue = (Songs !== undefined && Songs !== null) ? Songs.Queue[0] : null;
-		if(currentQueue !== null) {
+		if (currentQueue !== null) {
 			youtube.searchVideos(currentQueue.url, 1)
 				.then(results => {
 					const ytEmbed = new Discord.RichEmbed()
@@ -31,8 +30,8 @@ module.exports = {
 					console.log(err);
 				});
 		}
-		else{
-			message.channel.send('**Nothing is playing at this time, please use play (song) to play a song :x:**');
+		else {
+			message.channel.send('**Nothing is playing at this time, please use `(prefix) play (song)` to play a song :x:**');
 		}
 	},
 };

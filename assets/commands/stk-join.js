@@ -18,7 +18,12 @@ module.exports = {
 		if (!permissions.has('SPEAK')) {
 			return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 		}
-		message.channel.send(`**Joined to ${voiceChannel.name} and Ready to play** :thumbsup:`);
-		voiceChannel.join();
+		if(voiceChannel.connection == null) {
+			voiceChannel.join();
+			message.channel.send(`**Joined to ${voiceChannel.name} and Ready to play** :thumbsup:`);
+		}
+		else{
+			message.channel.send('** I\'m already connected use `(prefix)leave or (prefix)play` instead** :x:');
+		}
 	},
 };

@@ -15,7 +15,6 @@ module.exports = {
 				.setColor('#467ac9')
 				.setAuthor('Stalker Avatars', 'https://i.imgur.com/iTZPeAr.png')
 				.setTitle(' ** Your Awesome Current Avatar!! **')
-				.addBlankField(false)
 				.addField(':arrow_down: **Download here :D** :arrow_down:', `[Download!!](${message.author.displayAvatarURL})`, true)
 				.setImage(`${message.author.displayAvatarURL}`)
 				.setTimestamp()
@@ -23,14 +22,13 @@ module.exports = {
 
 			message.channel.send(EmbedAvatar);
 		}
-		else{
+		else {
 			const avatarList = message.mentions.users.map(user => {
 				const EmbedAvatars = new Discord.RichEmbed()
 					.setColor('#467ac9')
 					.setAuthor('Stalker Avatars', 'https://i.imgur.com/iTZPeAr.png')
 					.setTitle(` ** ${user.username}'s Awesome Current Avatar!! **`)
 					.addField('Requested By: ', `${message.author}`, true)
-					.addBlankField(false)
 					.addField(':arrow_down: **Download here :D** :arrow_down:', `[Download!!](${user.displayAvatarURL})`, true)
 					.setImage(`${user.displayAvatarURL}`)
 					.setTimestamp()

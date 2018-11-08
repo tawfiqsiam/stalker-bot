@@ -10,7 +10,7 @@ module.exports = {
 
 		const { voiceChannel } = message.member;
 		let stSong = options.songStatus.get(message.guild.id) || {};
-		if(!stSong.Paused)stSong.Paused = false;
+		if (!stSong.Paused) stSong.Paused = false;
 
 		const actionEmbed = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
@@ -22,20 +22,20 @@ module.exports = {
 		const actionError = new Discord.RichEmbed()
 			.setAuthor('Stalker Music', 'https://i.imgur.com/Xr28Jxy.png')
 			.setColor('#7f1515')
-			.addField('**__Song Error__**', '** The bot is currently paused, please use resume and after use skip :x:**', true)
+			.addField('**__Song Error__**', '** The bot is currently paused, please use `(prefix) resume` and after use `(prefix) skip` :x:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-		if(stSong.Paused == false) {
-			if(voiceChannel.connection !== null) {
+		if (stSong.Paused == false) {
+			if (voiceChannel.connection !== null) {
 				voiceChannel.connection.dispatcher.end();
 				message.channel.send(actionEmbed);
 				stSong.Paused = false;
 			}
-			else{
-				message.channel.send('** Nothing is playing, please use play (song)** :x:');
+			else {
+				message.channel.send('** Nothing is playing, please use `(prefix) play (song)`** :x:');
 			}
 		}
-		else{
+		else {
 			message.channel.send(actionError);
 		}
 		options.songStatus.set(message.guild.id, stSong);
