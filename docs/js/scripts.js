@@ -6,8 +6,8 @@ $(function() {
 const SRSettings = {
     reset: true,
     useDelay: 'onload',
-	// ? this will affect Mobile performance? Need More Test
-	mobile: true,
+	// * Disabeled for horizontal scroll on mobile clients
+	mobile: false,
 };
 
 const SrClassOptions = {
