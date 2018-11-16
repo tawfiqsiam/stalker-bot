@@ -2,6 +2,7 @@
 
 module.exports = {
 	name: 'clear',
+	category: 'Music',
 	usage: '<without parameters>',
 	aliases: ['cl', 'erase', 'restore'],
 	guildOnly: true,

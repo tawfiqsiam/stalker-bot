@@ -2,6 +2,7 @@
 const Discord = require('discord.js');
 module.exports = {
 	name: 'skip',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['next', 'jump'],
 	guildOnly: true,

@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 
 module.exports = {
 	name: 'ping',
+	category: 'Essentials',
 	usage: '<no have parameters>',
 	aliases: ['delay', 'time'],
 	cooldown: 15,

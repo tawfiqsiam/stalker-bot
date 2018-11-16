@@ -2,6 +2,7 @@
 
 module.exports = {
 	name: 'leave',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['quit', 'exit'],
 	guildOnly: true,

@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'nick',
+	category: 'Miscellaneous',
 	description: 'Change Stalker bot nickname!',
 	guildOnly: true,
 	args: true,

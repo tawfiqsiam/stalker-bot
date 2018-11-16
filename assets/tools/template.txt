@@ -2,6 +2,7 @@
 
 module.exports = {
 	name: 'command name',
+	category: 'category name',
 	usage: 'parameters description',
 	aliases: ['aliases'],
 	guildOnly: true,

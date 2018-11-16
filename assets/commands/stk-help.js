@@ -1,18 +1,16 @@
-const {
-	prefix,
-} = require('../config/botcfg');
+const Discord = require('discord.js');
+const { prefix } = require('../config/botcfg');
 
 module.exports = {
 	name: 'help',
+	category: 'Essentials',
 	description: 'List all of my commands or info about a specific command.',
 	aliases: ['commands'],
 	usage: '[command name]',
 	cooldown: 5,
 	execute(_message, _args) {
 		const data = [];
-		const {
-			commands,
-		} = _message.client;
+		const { commands } = _message.client;
 
 		if (!_args.length) {
 			/**
@@ -24,7 +22,19 @@ module.exports = {
 			 * in the requested channel.
 			 * Catch if the User has DM blocked
 			 */
-			data.push('Here\'s a list of all my commands:');
+
+			let help = new Discord.RichEmbed()
+				.setAuthor('List of Commands Stalker Bot', 'https://i.imgur.com/Xr28Jxy.png')
+				.setColor('#6082e0')
+				.addField('Dev Only Commands', `${commands.filter(cmd => cmd.category === 'dev-only').map(cmd => `\`${cmd.name}\``).join(', ')}`, false)
+				.addField('Essential Commands', `${commands.filter(cmd => cmd.category === 'Essentials').map(cmd => `\`${cmd.name}\``).join(', ')}`, false)
+				.addField('Miscellaneous Commands', `${commands.filter(cmd => cmd.category === 'Miscellaneous').map(cmd => `\`${cmd.name}\``).join(', ')}`, false)
+				.addField('Music Commands', `${commands.filter(cmd => cmd.category === 'Music').map(cmd => `\`${cmd.name}\``).join(', ')}`, false)
+				.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
+			return _message.channel.send(help);
+
+
+			/* data.push('Here\'s a list of all my commands:');
 			data.push(commands.map(command => command.name).join(', '));
 			data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
@@ -38,7 +48,7 @@ module.exports = {
 				.catch(error => {
 					console.error(`Could not send help DM to ${_message.author.tag}.\n`, error);
 					_message.reply('it seems like I can\'t DM you! Do you have DMs disabled?');
-				});
+				});*/
 		}
 
 		// Setup Help Structure Response

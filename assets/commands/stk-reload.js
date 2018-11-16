@@ -3,6 +3,7 @@
 
 module.exports = {
 	name: 'reload',
+	category: 'dev-only',
 	usage: '<no have parameters>',
 	aliases: ['delay', 'time'],
 	guildOnly: true,

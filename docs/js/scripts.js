@@ -60,5 +60,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     
     $(".badges").hover(function(){
         $(this).toggleClass('animated bounce');
-    });
+	});
+	
+	$('a[data-toggle="list"]').on('shown.bs.tab', function (e) {
+		$(e.relatedTarget).children().removeClass('animated bounceInRight');
+		$(e.target).children().addClass('animated bounceInRight');
+	})
 });

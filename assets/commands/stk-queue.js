@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 
 module.exports = {
 	name: 'queue',
+	category: 'music',
 	usage: '<tab number | empty for first tab>',
 	aliases: ['q', 'list'],
 	guildOnly: true,

@@ -3,10 +3,12 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'avatar',
+	name: 'avatars',
+	category: 'Miscellaneous',
 	usage: '<Tag Users>',
-	aliases: ['avatars', 'img'],
+	aliases: ['avatar', 'img'],
 	guildOnly: true,
+	cooldown: 5,
 	description: 'Get your or other server members avatar',
 	execute(message, _args) {
 

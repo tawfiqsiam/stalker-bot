@@ -19,7 +19,8 @@
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/themes/red-white.css">
 
-	<script src="https://unpkg.com/scrollreveal@4.0.4/dist/scrollreveal.min.js"></script>
+	<!--* ScrollReveal CDN Replaced for unpkg lastest stable release -->
+	<script src="https://unpkg.com/scrollreveal"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	 crossorigin="anonymous"></script>
 	<script src="./js/scripts.js"></script>
@@ -73,34 +74,58 @@
 			<section class="justify-content-center row feature-sec align-self-center px-0 collapse" id="FeatureShow">
 				<div class="col-12 my-3">
 					<h3 class="text-center feature-header">
-						Features
+						About and Features
 					</h3>
 				</div>
 				<div class="col-12 col-md-3 px-0 my-md-5 mx-2">
 					<div class="list-group rounded-0" id="list-tab" role="tablist">
-						<a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-						<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-						<a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-						<a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+						<a class="list-group-item list-group-item-action active" id="list-about-list" data-toggle="list" href="#list-about" role="tab" aria-controls="about">About</a>
+						<a class="list-group-item list-group-item-action" id="list-music-list" data-toggle="list" href="#list-music" role="tab" aria-controls="profile">Music</a>
+						<a class="list-group-item list-group-item-action" id="list-stuff-list" data-toggle="list" href="#list-stuff" role="tab" aria-controls="messages">Server Stuff</a>
+						<a class="list-group-item list-group-item-action" id="list-planned-list" data-toggle="list" href="#list-planned" role="tab" aria-controls="settings">Planned features</a>
 					</div>
 				</div>
 				<div class="col-12 col-md-8 my-5 my-md-0 px-md-3 py-5">
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique rem cupiditate dolorum est magnam beatae perspiciatis? Blanditiis, dolorem facere quis minus mollitia ullam odio, alias possimus quo molestias officiis beatae!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, eius? Tempore asperiores iusto aliquam sunt consequatur at praesentium inventore accusantium voluptatum possimus, quos fugiat, blanditiis quod fugit distinctio mollitia ex!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed dolores cupiditate, cum magnam aut quibusdam quia a atque debitis laborum odio aperiam, pariatur enim, explicabo eveniet? Eaque velit odio doloremque!
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nemo incidunt quis sequi sunt eveniet, dolorum repudiandae. Magnam, ducimus temporibus, cum nesciunt magni, maxime hic similique neque perferendis perspiciatis ipsum.
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla dolores possimus laudantium? Accusamus odit vel molestiae maiores, tempore distinctio at facilis, et reiciendis quas minima recusandae iusto, a dolores quisquam.
+						<div class="tab-pane fade show active" id="list-about" role="tabpanel" aria-labelledby="list-about-list">
+							<p class="text-left my-2 bounce-t-right">
+								This bot is designed to provide the best user experience possible tottaly free, 
+								as time goes by adding new and exciting features; built from scratch, 
+								the bot will evolve over time so join the community and communicate that you would like to see in the bot, 
+								all ideas are welcome.
+							</p>
+							<p class="text-left my-2 bounce-t-right">
+								Some of the current features of the bot are the possibility to see the avatars of the members of your server for download, 
+								to listen to music from any title or playlist of youtube (we are still working on the playback from livestreams). 
+								all detailed in this list.
+							</p>
 						</div>
-						<div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia modi nemo non harum quam fuga ipsa aperiam doloremque, laudantium debitis, corrupti delectus! Quisquam, vitae. Ea, possimus nobis. Odio, molestiae iste.
+						<div class="tab-pane fade" id="list-music" role="tabpanel" aria-labelledby="list-music-list">
+							<h3 class="text-center my-1">
+								WIP DESCRIPTION
+							</h3>
+							<p class="text-center my-3">
+								At this moment this description is a work in process come back later, 
+								maybe the new skynet is born here and you will surely want to know when it happens
+							</p>
 						</div>
-						<div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum itaque quos expedita enim earum atque esse repudiandae, corrupti accusantium natus inventore vitae quae magnam minima ut quia, temporibus voluptatem est.
+						<div class="tab-pane fade" id="list-stuff" role="tabpanel" aria-labelledby="list-stuff-list">
+							<h3 class="text-center my-1">
+								WIP DESCRIPTION
+							</h3>
+							<p class="text-center my-3">
+								At this moment this description is a work in process come back later, 
+								maybe the new skynet is born here and you will surely want to know when it happens
+							</p>
 						</div>
-						<div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, dolore. Error reiciendis natus beatae sapiente, veniam corporis voluptate rem tempore. Non id eum dolore inventore quaerat tempore molestiae officiis maxime?
+						<div class="tab-pane fade" id="list-planned" role="tabpanel" aria-labelledby="list-planned-list">
+							<h3 class="text-center my-1">
+								WIP DESCRIPTION
+							</h3>
+							<p class="text-center my-3">
+								At this moment this description is a work in process come back later, 
+								maybe the new skynet is born here and you will surely want to know when it happens
+							</p>
 						</div>
 					</div>
 				</div>
@@ -136,7 +161,8 @@
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.11/dist/sweetalert2.all.min.js"></script>
 	<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-	<!-- ? need more test <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
+	<!--* New Promise Pollyfills NPM-->
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
 	<script src="js/alerts.js"></script>
 </body>
 
