@@ -4,6 +4,7 @@ const play = require('./stk-play');
 
 module.exports = {
 	name: 'resume',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['r', 'continue'],
 	guildOnly: true,

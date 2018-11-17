@@ -7,6 +7,7 @@ const youtube = new YouTube(process.env.API_TOKEN);
 
 module.exports = {
 	name: 'play',
+	category: 'Music',
 	usage: '<video name | video/playlist url>',
 	aliases: ['search', 'music'],
 	guildOnly: true,
@@ -126,7 +127,7 @@ module.exports = {
 							Status.Playing = false;
 							options.isplay.set(message.guild.id, Status);
 							options.songQ.delete(message.guild.id);
-							message.channel.send(`** No more songs available, I will Leave the ${voiceChannel.name} channel in 15 seconds, please \n don't use the play command until leave ** :stopwatch:`);
+							message.channel.send(`** No more songs available, I will Leave the ${voiceChannel.name} channel in 15 seconds, please don't use the play command until leave ** :stopwatch:`);
 							setTimeout(function() {
 								let command = _client.commands.get('leave');
 								command.execute(message, _args, _client, options);

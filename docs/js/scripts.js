@@ -6,8 +6,8 @@ $(function() {
 const SRSettings = {
     reset: true,
     useDelay: 'onload',
-	// ? this will affect Mobile performance? Need More Test
-	mobile: true,
+	// * Disabeled for horizontal scroll on mobile clients
+	mobile: false,
 };
 
 const SrClassOptions = {
@@ -56,9 +56,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	ScrollReveal().reveal('.right-reveal', RightOptions);
 	ScrollReveal().reveal('.left-reveal', LeftOptions);
 	ScrollReveal().reveal('.top-reveal', TopOptions);
-    ScrollReveal().reveal('.bot-reveal', BottomOptions);
-    
+	ScrollReveal().reveal('.bot-reveal', BottomOptions);
+	
     $(".badges").hover(function(){
         $(this).toggleClass('animated bounce');
-    });
+	});
+	
+	$('a[data-toggle="list"]').on('shown.bs.tab', function (e) {
+		$(e.relatedTarget).children().removeClass('animated bounceInRight');
+		$(e.target).children().addClass('animated bounceInRight');
+	})
 });

@@ -4,6 +4,7 @@ const play = require('./stk-play');
 
 module.exports = {
 	name: 'pause',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['p', 'wait'],
 	guildOnly: true,

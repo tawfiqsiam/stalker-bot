@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 
 module.exports = {
 	name: 'join',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['enter', 'in'],
 	guildOnly: true,

@@ -6,6 +6,7 @@ const youtube = new YouTube(process.env.API_TOKEN);
 
 module.exports = {
 	name: 'np',
+	category: 'Music',
 	usage: '<no have parameters>',
 	aliases: ['current', 'now'],
 	guildOnly: true,
