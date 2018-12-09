@@ -4,9 +4,10 @@ const Discord = require('discord.js')
 ;module.exports = {
 	name: 'back',
 	category: 'Music',
-	usage: '<number of songs to back> max 5',
-	aliases: ['prev', 'rwd'],
+	usage: '<without parameters>',
+	aliases: ['prev', 'rwd', 'pv'],
 	guildOnly: true,
+	cooldown: 2,
 	args: false,
 	description: 'Go back to previous songs in the queue by stalker rbot',
 	async execute(message, _args, _client, options) {
@@ -64,7 +65,7 @@ const Discord = require('discord.js')
 					if(parseInt(mess) <= 5 && parseInt(mess) > 0) {
 						BackSongs = options.backQ.get(mess.guild.id) || {};
 						Songs = options.songQ.get(mess.guild.id) || {};
-						Songs.Queue.splice(1, 0, BackSongs.Queue[parseInt(mess) - 1]);
+						Songs.Queue.splice(1, 0, BackSongs.Queue[parseInt(mess) - 1], Songs.Queue[0]);
 						options.songStatus.set(mess.guild.id, stSong);
 						options.songQ.set(mess.guild.id, Songs);
 						voiceChannel.connection.dispatcher.end();
@@ -75,6 +76,10 @@ const Discord = require('discord.js')
 						collector.stop();
 						return mess.reply('** Please Choose a number between 1 and 5 ... **');
 					}
+				});
+
+				collector.on('end', mess => {
+					mess.channel.send('** The time of choice for previous, to finished, if you want you can use the command again .. **')
 				});
 			}
 			else {

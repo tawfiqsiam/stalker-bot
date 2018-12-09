@@ -9,7 +9,7 @@ module.exports = {
 	name: 'play',
 	category: 'Music',
 	usage: '<video name | video/playlist url>',
-	aliases: ['search', 'music'],
+	aliases: ['search', 'music', 'p'],
 	guildOnly: true,
 	args: true,
 	description: 'Play music from  youtube by stalker bot',

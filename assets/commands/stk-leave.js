@@ -29,9 +29,10 @@ module.exports = {
 		options.isplay.set(message.guild.id, Status);
 		options.songStatus.set(message.guild.id, stSong);
 		options.songQ.delete(message.guild.id);
+		options.backQ.delete(message.guild.id);
 		if(voiceChannel.connection != null) {
 			voiceChannel.leave();
-			message.channel.send('**Disconnected, and cleared the queue** :thumbsup:');
+			message.channel.send('**Disconnected, and cleared the play and back queue** :thumbsup:');
 		}
 		else{
 			message.channel.send('**I can\'t leave, if i\'m not connected use `(prefix)join` instead** :x:');

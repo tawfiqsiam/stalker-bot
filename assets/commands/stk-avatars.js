@@ -31,7 +31,7 @@ module.exports = {
 					.setAuthor('Stalker Avatars', 'https://i.imgur.com/iTZPeAr.png')
 					.setTitle(` ** ${user.username}'s Awesome Current Avatar!! **`)
 					.addField('Requested By: ', `${message.author}`, true)
-					.addField(':arrow_down: **Download here :D** :arrow_down:', `[Download!!](${user.displayAvatarURL})`, true)
+					.addField(':arrow_down: **Download it here** :arrow_down:', `[Download!!](${user.displayAvatarURL})`, true)
 					.setImage(`${user.displayAvatarURL}`)
 					.setTimestamp()
 					.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
