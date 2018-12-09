@@ -122,7 +122,6 @@ module.exports = {
 							BackSongs.Queue.unshift(currentplay);
 							if(BackSongs.Queue.length > 5) BackSongs.Queue.length = 5;
 							options.backQ.set(message.guild.id, BackSongs);
-							console.log(`Logged to back at ${Date.now}`);
 						}
 						Songs.Queue.shift();
 						if (Songs.Queue.length > 0) {

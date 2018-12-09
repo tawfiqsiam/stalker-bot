@@ -38,10 +38,6 @@ const Discord = require('discord.js')
 			.addField('**__Song Error__**', '** The bot is currently paused, please use `(prefix) resume` and after use `(prefix) skip` :x:**', true)
 			.setTimestamp()
 			.setFooter('Powered by Stalker bot', 'https://i.imgur.com/Xr28Jxy.png');
-		let selected = _args[0] < 5 && _args[0] >= 1 ? _args[0] : 1 || 1;
-		let backSongsQueue = BackSongs.Queue;
-		let currentQueue = Songs.Queue;
-		// console.log(`Back Queue: ${JSON.stringify(backSongsQueue)}`);
 		if (stSong.Paused == false) {
 			if (voiceChannel.connection !== null) {
 				let ms = await message.channel.send('`Searching Music Queue ...`');
@@ -79,7 +75,7 @@ const Discord = require('discord.js')
 				});
 
 				collector.on('end', mess => {
-					mess.channel.send('** The time of choice for previous, to finished, if you want you can use the command again .. **')
+					mess.channel.send('** The time of choice for previous, to finished, if you want you can use the command again .. **');
 				});
 			}
 			else {

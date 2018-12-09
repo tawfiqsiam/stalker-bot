@@ -9,7 +9,6 @@ before_install:
 install:
 - dos2unix ./test/test.sh
 - dos2unix ./test/send.sh
-- dos2unix ./build.sh
 - npm install -g eslint --save
 - npm install
 jobs:
