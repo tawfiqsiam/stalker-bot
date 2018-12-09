@@ -2,7 +2,6 @@
 
 ## Travis Build Status [![Build Status](https://travis-ci.com/Co-Op-Development/stalker-bot.svg?branch=master)](https://travis-ci.com/Co-Op-Development/stalker-bot)
 
-
 New Discord js Lib based bot for Discord
 Now with more Music, and avatars, Cooming soon Skynet
 
@@ -10,7 +9,7 @@ Now with more Music, and avatars, Cooming soon Skynet
 
 ## Change Log
 
- **- Initial Alpha - BETA V-9** 
+## - Initial Alpha - BETA V-9**
 
 > 30/SEP/2018 - 8/NOV/2018
 
@@ -19,7 +18,7 @@ Now with more Music, and avatars, Cooming soon Skynet
 - Travis CI implemented
 - Some common Security Breaches solved
 
- **- BETA V-10** 
+## - BETA V-10**
 
 > 16/NOV/2018
 

@@ -7,6 +7,7 @@ const fs = require('fs');
 // require the discord.js module
 const Discord = require('discord.js');
 const queue = new Map();
+const backQueue = new Map();
 const playing = new Map();
 const Status = new Map();
 
@@ -52,6 +53,7 @@ client.on('ready', () => {
 client.on('message', async message => {
 	let options = {
 		songQ: queue,
+		backQ: backQueue,
 		isplay: playing,
 		songStatus: Status,
 	};

@@ -1,12 +1,13 @@
 {
   "name": "stalker-bot",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Custom Halo/Warframe/League of legends/Server Discord bot",
   "main": "bot.js",
   "scripts": {
     "test": "npm run lint",
     "lint": "eslint --debug bot.js",
     "wincheck": "node ./test/OsCheck/WinPreInstall.js",
+    "newcmd": "bash assets/tools/build-command.sh",
     "windows-install": "npm i --global --production --save windows-build-tools ffmpeg-binaries",
     "start": "pm2 start bot.js",
     "launch-dev": "pm2 start bot.js  --watch ",
@@ -17,31 +18,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/D4RKAR117/stalker-bot.git"
+    "url": "git+https://github.com/Co-Op-Development/stalker-bot.git"
   },
   "keywords": [
     "discord",
     "discord-js",
     "discord-bot"
   ],
-  "author": "D4RKAR117",
+  "author": "Ittim, D4RKAR117, Coop-Development",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/D4RKAR117/stalker-bot/issues"
+    "url": "https://github.com/Co-Op-Development/stalker-bot/issues"
   },
-  "homepage": "https://github.com/D4RKAR117/stalker-bot#readme",
+  "homepage": "https://github.com/Co-Op-Development/stalker-bot#readme",
   "dependencies": {
     "babel-eslint": "^10.0.1",
-    "canvas": "^2.0.1",
+    "canvas": "^2.1.0",
     "discord.js": "^11.4.2",
     "dotenv": "^6.1.0",
-    "eslint": "^5.6.1",
+    "eslint": "^5.9.0",
     "eslint-config-defaults": "^9.0.0",
     "is-playlist": "^1.0.0",
     "moment": "^2.22.2",
-    "node-opus": "^0.3.0",
+    "node-opus": "^0.3.1",
     "pm2": "^3.2.2",
-    "simple-youtube-api": "^5.0.2",
+    "simple-youtube-api": "^5.1.1",
     "ytdl-core": "^0.26.3"
   }
 }

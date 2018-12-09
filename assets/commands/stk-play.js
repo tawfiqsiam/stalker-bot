@@ -9,7 +9,7 @@ module.exports = {
 	name: 'play',
 	category: 'Music',
 	usage: '<video name | video/playlist url>',
-	aliases: ['search', 'music'],
+	aliases: ['search', 'music', 'p'],
 	guildOnly: true,
 	args: true,
 	description: 'Play music from  youtube by stalker bot',
@@ -17,8 +17,10 @@ module.exports = {
 		process.setMaxListeners(0);
 		let Songs = options.songQ.get(message.guild.id) || {};
 		let Status = options.isplay.get(message.guild.id) || {};
+		let BackSongs = options.backQ.get(message.guild.id) || {};
 		let isPlaylist = false;
 		if (!Songs.Queue) Songs.Queue = [];
+		if (!BackSongs.Queue) BackSongs.Queue = [];
 		if (!Status.Playing) Status.Playing = false;
 		options.isplay.set(message.guild.id, Status);
 		const { voiceChannel } = message.member;
@@ -116,6 +118,11 @@ module.exports = {
 					});
 					let dispatcher = connection.playStream(stream);
 					dispatcher.on('end', () => {
+						if(BackSongs.Queue.some(s => s.url !== currentplay.url) || BackSongs.Queue.length <= 0) {
+							BackSongs.Queue.unshift(currentplay);
+							if(BackSongs.Queue.length > 5) BackSongs.Queue.length = 5;
+							options.backQ.set(message.guild.id, BackSongs);
+						}
 						Songs.Queue.shift();
 						if (Songs.Queue.length > 0) {
 							currentplay = Songs.Queue[0];
@@ -127,11 +134,7 @@ module.exports = {
 							Status.Playing = false;
 							options.isplay.set(message.guild.id, Status);
 							options.songQ.delete(message.guild.id);
-							message.channel.send(`** No more songs available, I will Leave the ${voiceChannel.name} channel in 15 seconds, please don't use the play command until leave ** :stopwatch:`);
-							setTimeout(function() {
-								let command = _client.commands.get('leave');
-								command.execute(message, _args, _client, options);
-							}, 15000);
+							message.channel.send('** There are no more songs in the queue, I\'ll wait for more songs or you can use the "leave" command to leave the channel. **');
 						}
 					});
 				}

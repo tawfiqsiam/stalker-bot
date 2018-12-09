@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 8.12.0
+- 10.14.1
 os:
 - linux
 sudo: required
@@ -9,7 +9,6 @@ before_install:
 install:
 - dos2unix ./test/test.sh
 - dos2unix ./test/send.sh
-- dos2unix ./build.sh
 - npm install -g eslint --save
 - npm install
 jobs:

@@ -19,10 +19,10 @@ read nameCmd
 if [[ -z "$nameCmd" ]]; 
 then
 	echo "You have not entered any name, it will be left empty"
-	touch ../commands/stk-[CommandName].js && cat ./template.txt >> ../commands/stk-[CommandName].js
+	touch assets/commands/stk-[CommandName].js && cat assets/tools/template.txt >> assets/commands/stk-[CommandName].js
 	echo "New Command file generated **Please remember change the default file name**" 
 else
-	touch ../commands/stk-$nameCmd.js && cat ./template.txt >> ../commands/stk-$nameCmd.js
+	touch assets/commands/stk-$nameCmd.js && cat assets/tools/template.txt >> assets/commands/stk-$nameCmd.js
 	echo "New Command file generated with name: "$nameCmd 
 fi
 sleep 5
