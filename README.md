@@ -26,3 +26,12 @@ Now with more Music, and avatars, Cooming soon Skynet
 - Impoved Github Pages Website
 - Implemented Category Collections
 - Fixed Minor bugs
+
+## - BETA V-11**
+
+> 8/DIC/2018
+
+- Fixed Creation tools crash
+- Added Back Music Command
+- Created new play statements
+- Minor Bugs Correction
