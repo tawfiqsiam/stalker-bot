@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://github.com/denysdovhan/spaceship-prompt">
+  <a href="https://discordbots.org/bot/496184604559015936">
     <img alt="Stalker Bot" src="docs/resources/img/stalker.svg" width="600">
   </a>
   <br>Stalker Bot the Swiss knife of the bots, maybe</br>
@@ -8,7 +8,7 @@
 <p align="center">
   <!-- NPM Version -->
     <a href="https://david-dm.org/Co-Op-Development/stalker-bot">
-    <img src="https://david-dm.org/Co-Op-Development/stalker-bot.svg" 
+    <img src="https://david-dm.org/Co-Op-Development/stalker-bot.svg"
       alt="Packages Status" />
   </a>
 
@@ -53,35 +53,45 @@ Now with more Music, and avatars, Cooming soon Skynet
 
 > 30/SEP/2018 - 8/NOV/2018
 
-- See Git commit history for more info
-- Implemented Music COmmands
-- Travis CI implemented
-- Some common Security Breaches solved
+* See Git commit history for more info
+* Implemented Music COmmands
+* Travis CI implemented
+* Some common Security Breaches solved
 
 ## - BETA V-10**
 
 > 16/NOV/2018
 
-- Improved Help Command for User Conffort
-- Impoved Github Pages Website
-- Implemented Category Collections
-- Fixed Minor bugs
+* Improved Help Command for User Conffort
+* Impoved Github Pages Website
+* Implemented Category Collections
+* Fixed Minor bugs
 
 ## - BETA V-11**
 
 > 8/DIC/2018
 
-- Fixed Creation tools crash
-- Added Back Music Command
-- Created new play statements
-- Minor Bugs Correction
+* Fixed Creation tools crash
+* Added Back Music Command
+* Created new play statements
+* Minor Bugs Correction
 
 ## - BETA V-12**
 
 > 11/DIC/2018
 
-- Updated Github Pages
-- Nick command now ask for Manage Nicknames guil perms
-- Added new aliases for some commands
-- Updated README.md
-- Minor Bugs Correction
+* Updated Github Pages
+* Nick command now ask for Manage Nicknames guil perms
+* Added new aliases for some commands
+* Updated README.md
+* Minor Bugs Correction
+
+## - BETA V-13**
+
+> 14/DIC/2018 - 14/DIC/2018
+
+* Added Lodash to project Dependencies
+* Updated List Command
+* Update for MD list style
+* New Format for the change brach and version
+  - Implemented Date Ranges with max range of 1 week from initial branch push
