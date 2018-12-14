@@ -12,7 +12,7 @@ const playing = new Map();
 const Status = new Map();
 
 // Stablish Default Bot Config Objects
-const { prefix, server } = require('./assets/config/botcfg.json');
+const { prefix } = require('./assets/config/botcfg.json');
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -40,7 +40,6 @@ for (const file of commandFiles) {
 client.on('ready', () => {
 	let Activities = [`on ${client.guilds.size} servers`,
 		`with ${client.users.size} users`,
-		`${server}`,
 		`prefix: ${prefix}`,
 	];
 	setInterval(function() {
