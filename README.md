@@ -88,7 +88,7 @@ Now with more Music, and avatars, Cooming soon Skynet
 
 ## - BETA V-13**
 
-> 14/DIC/2018 - XX/DIC/2018
+> 14/DIC/2018 - 14/DIC/2018
 
 * Added Lodash to project Dependencies
 * Updated List Command
